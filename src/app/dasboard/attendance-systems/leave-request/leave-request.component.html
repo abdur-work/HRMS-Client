@@ -1,0 +1,41 @@
+<div class="pb-5">
+  <div class="text-end my-3" >
+    <button
+      type="button"
+      class="btn request-button"
+      [routerLink]="['/dashboard/attendance-system/add-leave-request']"
+    >
+      New Request
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table>
+      <tr class="table-header">
+        <th>Date From</th>
+        <th>Time From</th>
+        <th>Time To</th>
+        <th>Leave Duration</th>
+        <th>Leave Type</th>
+        <th>Status</th>
+      </tr>
+      <tr class="table-data"
+          *ngFor="let attendace of showLeaveRequestCalendarView">
+        <td>{{ attendace.leaveStartDate | date }}</td>
+        <td>{{ attendace.leaveTimeFrom }}</td>
+        <td>{{ attendace.leaveTimeTo }}</td>
+        <td>{{ attendace.leaveDuration }}</td>
+        <td class="emp-department">
+          <div *ngIf="attendace.leaveType=='full-day'" class="status-present">Full Leave</div>
+          <div *ngIf="attendace.leaveType=='half-day'" class="status-absent">half Leave</div>
+          <div *ngIf="attendace.leaveType=='short-leave'" class="status-leave">Short Leave</div>
+          <div *ngIf="attendace.leaveType=='Present'" class="status-present">Present</div>
+        </td>
+        <td>
+          <div *ngIf="attendace.status=='Approved'" class="status-present">Approved</div>
+          <div *ngIf="attendace.status=='Rejected'" class="status-absent">Rejected</div>
+          <div *ngIf="attendace.status=='Pending'" class="status-leave">Pending</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

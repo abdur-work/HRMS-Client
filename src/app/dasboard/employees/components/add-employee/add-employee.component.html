@@ -1,0 +1,389 @@
+<div class="w-100">
+  <div class="bg-light d-flex justify-content-center">
+    <div class="content_area bg-white">
+      <div class="create d-flex align-items-center justify-content-start justify-content-md-start">
+        Add Employee
+      </div>
+      <!-- <div class="job_post">Personal Information</div> -->
+      <div
+        class="job_bar mt-2 d-flex flex-row align-items-center justify-content-start justify-content-md-start gap-3 gap-md-5">
+        <a (click)="tabSwitch(1)" [ngClass]="[tabNumber == 1 ? 'activeSubMenu' : '']">Personal Information</a>
+        <a (click)="tabSwitch(2)" [ngClass]="[tabNumber == 2 ? 'activeSubMenu' : '']">HR Information</a>
+        <a (click)="tabSwitch(3)" [ngClass]="[tabNumber == 3 ? 'activeSubMenu' : '']">Bank Details</a>
+        <a (click)="tabSwitch(4)" [ngClass]="[tabNumber == 4 ? 'activeSubMenu' : '']">Salary</a>
+      </div>
+      <!-- details -->
+
+      <div class="d-flex flex-column gap-2" *ngIf="tabNumber == 1">
+        <div #dialogContainer></div>
+        <div class="d-flex flex-column gap-1">
+          <div class="d-flex align-items-center justify-content-center">
+
+            <img *ngIf="dummyImage" src="../../../../../assets/images/employees-img/Ellipse 1210.svg"
+              class="profile-image  mb-3 " style="margin-left: 5% " alt="profile-image" />
+            <div *ngIf="!uplodedFileUrl">
+              <div class="dropdown">
+                <img class="dropdown-toggle" style=" margin-left: -95%; margin-top: 80%; "
+                  src="../../../../../assets/images/employees-img/change photo option.svg" data-bs-toggle="dropdown"
+                  aria-expanded="false" />
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" (click)="openWebcam()">Webcam</a></li>
+                  <li>
+                    <label class="dropdown-item">
+                      Browse For File
+                      <input class="upload_btn" type="file" style="display: none;"
+                        (change)="openFileUploadModal($event)" [accept]="acceptFiles" />
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div *ngIf="uplodedFileUrl" class="position-relative  ">
+              <div
+                class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle remove-icon">
+                <i role="button" class="fa fa-remove" (click)="removeUploadedFile()"></i>
+              </div>
+
+              <img [src]="uplodedFileUrl" (click)="showPreview()" class="profile-image" />
+
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2 w-100">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Full Name<span class="stearic">*</span></label>
+              <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.fullName" placeholder=""
+                [ngClass]="{
+                  'invalid-field': !employeeRegisterRqst.fullName && !isValid
+                }" />
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Email<span class="stearic">*</span></label>
+              <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.email" [ngClass]="{
+                  'invalid-field': !employeeRegisterRqst.email && !isValid
+                }" />
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <input type="checkbox" [(ngModel)]="defaultPassword" (change)="
+                  defaultPassword ? generatePassword() : clearPassword()
+                " />
+              <label class="label-input ms-2">Use default password<span class="stearic">*</span></label>
+
+              <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.password" [ngClass]="{
+                  'invalid-field': !employeeRegisterRqst.password && !isValid
+                }" />
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Gender<span class="stearic">*</span></label>
+              <select class="search-input" [(ngModel)]="employeeRegisterRqst.gender" [ngClass]="{
+                  'invalid-field': !employeeRegisterRqst.gender && !isValid
+                }">
+                <option value="">Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Diverse">Diverse</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Experience<span class="optional text-muted">(Optional)</span></label>
+              <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.experience" />
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Phone Number<span class="stearic">*</span></label>
+              <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.phoneNumber" [ngClass]="{
+                  'invalid-field': !employeeRegisterRqst.phoneNumber && !isValid
+                }" />
+            </div>
+          </div>
+          <div class="form-group  col-12 col-md-6">
+            <label class="label-input">Qualification<span class="optional text-muted">(Optional)</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.qualification" />
+          </div>
+        </div>
+        <div class="text-center mt-1 mt-md-4">
+          <button class="save-btn" (click)="validatePersonalInformation()">
+            Next
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-2" *ngIf="tabNumber === 2">
+        <div class="d-flex flex-column gap-1">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Work Type</label>
+              <select [(ngModel)]="employeeRegisterRqst.workType" class="search-input" [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.workType && !isValid
+              }">
+                <option value="">Select Type</option>
+                <option value="onsite">On Site</option>
+                <option value="remote">Remote</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Employment Type</label>
+              <select [(ngModel)]="employeeRegisterRqst.employmentType" class="search-input">
+                <option value="">Please select Employment Type</option>
+                <ng-container *ngFor="let et of listLookup.employmentTypeDDLResponse">
+                  <option [value]="et.employmentTypeId">{{et.employmentTypeName}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Office</label>
+              <select [(ngModel)]="employeeRegisterRqst.office" class="search-input"
+                (change)="OnOfficeSelectionChange($event)">
+                <option value="0">Please select office</option>
+                <ng-container *ngFor="let o of listLookup.officeLocationDDL">
+                  <option [value]="o.officeId">{{o.officeLocationName}}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Department</label>
+              <select [(ngModel)]="employeeRegisterRqst.department" class="search-input"
+                (change)="OnDepartmentSelectionChange($event)">
+                <option value="0">Please select department</option>
+                <ng-container *ngFor="let d of listDepartment">
+                  <option [value]="d.departmentId">{{d.departmentName}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Team</label>
+              <select [(ngModel)]="employeeRegisterRqst.team" class="search-input"
+                (change)="OnTeamSelectionChange($event)">
+                <option value="0">Please select team</option>
+                <ng-container *ngFor="let t of listTeam">
+                  <option [value]="t.teamId">{{t.teamName}}</option>
+                </ng-container>
+              </select>
+            </div>
+
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Postion</label>
+              <select [(ngModel)]="employeeRegisterRqst.position" class="search-input">
+                <option value="0">Please select position</option>
+                <ng-container *ngFor="let p of positionList">
+                  <option [value]="p.positionId">{{p.positionName}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Joining Date</label>
+              <input type="date" class="search-input" [(ngModel)]="employeeRegisterRqst.hireDate" />
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Probation Period</label>
+              <select [(ngModel)]="employeeRegisterRqst.probationPeriod" class="search-input">
+                <option value="No Probation">No Probation</option>
+                <option value="1 month">1 month</option>
+                <option value="2 month">2 month</option>
+                <option value="3 month">3 month</option>
+                <option value="4 month">4 month</option>
+                <option value="5 month">5 month</option>
+                <option value="6 month">6 month</option>
+                <option value="End of probation period">
+                  End of probation period
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-12 col-md-6">
+              <label class="label-input">Contract Ends</label>
+              <input type="date" class="search-input" [(ngModel)]="employeeRegisterRqst.contractEnd" />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Shift</label>
+            <select [(ngModel)]="employeeRegisterRqst.ShiftId" class="search-input">
+              <option value="0">Please select Shift</option>
+              <ng-container *ngFor="let p of shiftList">
+                <option [value]="p.shiftId">{{p.shiftName}}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Number of Leaves allowed</label>
+            <input type="number" class="search-input" [(ngModel)]="employeeRegisterRqst.NumberOfLeavesAllowed" />
+          </div>
+        </div>
+        <!-- reporting to team or  -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" [(ngModel)]="employeeRegisterRqst.ReportingToTeam"
+            id="flexCheckDefault">
+          <label class="label-input">
+            Reported to Team
+          </label>
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit" class="save-btn text-white" (click)="validateHRInformation()">
+            Next
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-2" *ngIf="tabNumber == 3">
+        <div class="d-flex flex-column align-items-center gap-2 w-100">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Bank Name<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.bankName" placeholder=""
+              [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.bankName && !isValid
+              }" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Branch Name<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.BankBranch" placeholder=""
+              [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.BankBranch && !isValid
+              }" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Account Holder<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.AccountHolderName" placeholder=""
+              [ngClass]="{
+                'invalid-field':
+                  !employeeRegisterRqst.AccountHolderName && !isValid
+              }" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Account Number<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.AccountNumber" placeholder=""
+              [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.AccountNumber && !isValid
+              }" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">AC/IBAN<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.iban" placeholder="" [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.iban && !isValid
+              }" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">IFSC Code<span class="stearic">*</span></label>
+            <input type="text" class="search-input" [(ngModel)]="employeeRegisterRqst.ifscCode" placeholder=""
+              [ngClass]="{
+                'invalid-field': !employeeRegisterRqst.ifcCode && !isValid
+              }" />
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit" class="save-btn text-white fw-bold px-5" (click)="validateBankDetails()">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-2" *ngIf="tabNumber == 4">
+        <div class="d-flex flex-column gap-1">
+          <div class="form-group">
+            <label class="label-input">Pay Type:</label>
+            <select id="pay-type" name="pay-type" class="search-input" [(ngModel)]="employeeSalary.payType">
+              <option value="">Select Pay Type</option>
+              <option value="monthly">Monthly</option>
+              <option value="hourly">Hourly</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label-input">Currency:</label>
+            <select id="pay-type" name="pay-type" class="search-input" [(ngModel)]="employeeSalary.currency">
+              <option value="">Select Currency</option>
+              <option value="PKR">Pakistani Rupees</option>
+              <option value="USD">US Dollar (USD)</option>
+              <option value="EUR">Euro (EUR)</option>
+              <option value="GBP">British Pound (GBP)</option>
+              <option value="JPY">JPY</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="employeeSalary.payType == 'monthly'">
+            <label class="label-input" for="monthly-pay">Monthly Pay:</label>
+            <input type="number" [(ngModel)]="employeeSalary.monthlyPay" id="monthly-pay" name="monthly-pay" min="0"
+              class="search-input" step="0.01" />
+          </div>
+          <div class="form-group" *ngIf="employeeSalary.payType == 'hourly'">
+            <label for="hourly-pay" class="label-input">Hourly Pay:</label>
+            <input type="number" [(ngModel)]="employeeSalary.hourlyPay" id="hourly-pay" name="hourly-pay" min="0"
+              step="0.01" class="search-input" />
+          </div>
+          <div class="form-group" *ngIf="employeeSalary.payType == 'hourly'">
+            <label for="hourly-pay" class="label-input">Hours Worked:</label>
+            <input type="number" [(ngModel)]="employeeSalary.hoursWorked" id="hours-worked" name="hours-worked" min="0"
+              step="0.01" class="search-input" />
+          </div>
+
+          <div class="form-group" *ngIf="employeeSalary.payType == 'daily'">
+            <label for="daily-pay" class="label-input">Daily Pay:</label>
+            <input type="number" [(ngModel)]="employeeSalary.dailyPay" id="daily-pay" name="daily-pay" min="0"
+              step="0.01" class="search-input" />
+          </div>
+
+          <div class="form-group" *ngIf="employeeSalary.payType == 'weekly'">
+            <label for="weekly-pay" class="label-input">Weekly Pay:</label>
+            <input type="number" [(ngModel)]="employeeSalary.weeklyPay" id="weekly-pay" name="weekly-pay" min="0"
+              step="0.01" class="search-input" />
+          </div>
+
+          <div class="form-group" *ngIf="employeeSalary.payType == 'weekly'">
+            <label for="weeks-worked" class="label-input">Weeks Worked:</label>
+            <input type="number" [(ngModel)]="employeeSalary.weeksWorked" id="weeks-worked" name="weeks-worked" min="0"
+              step="0.01" class="search-input" />
+          </div>
+
+          <!--<div class="form-group">
+            <label class="label-input">Paid Vacation</label>
+            <select [(ngModel)]="employeeRegisterRqst.paidVacation" class="search-input">
+              <option value="24 days">24 days</option>
+              <option value="Working Students">Working Students</option>
+            </select>
+          </div>-->
+          <!--<div class="d-flex justify-content-between mt-3">-->
+          <!--<div class="form-group w-50 ms-2">
+            <label class="label-input">Working Schedule</label>
+            <select [(ngModel)]="employeeRegisterRqst.workingSchedule" class="search-input">
+              <option value="Freelancer - working hours on invoice">Freelancer - working hours on invoice</option>
+              <option value="Full-time, 40 hours with time tracking, (mon,tue,wed,thu,fri)">Full-time, 40 hours with time tracking, (mon,tue,wed,thu,fri)"</option>
+              <option value="Full-time, 40 hours without time tracking, (mon,tue,wed,thu,fri)">Full-time, 40 hours without time tracking, (mon,tue,wed,thu,fri)"</option>
+              <option value="Part-time, 16 hours, (mon,tue)">Part-time, 16 hours, (mon,tue)</option>
+              <option value="Part-time, 20 hours, (mo,tue,wed,thu)">Part-time, 20 hours, (mo,tue,wed,thu)</option>
+              <option value="Part-time, 20 hours, (mon,tue,wed,thu,fri)">Part-time, 20 hours, (mon,tue,wed,thu,fri)"</option>
+              <option value="Part-time, 30 hours, (mon,tue,wed,thu)">Part-time, 30 hours, (mon,tue,wed,thu)"</option>
+              <option value="Working student, 20 hours, (semester)">Working student, 20 hours, (semester)</option>
+              <option value="Working student, 40 hours, (semester break)">Working student, 40 hours, (semester break)</option>
+            </select>
+          </div>-->
+          <!--</div>-->
+        </div>
+        <div>
+          <div class="text-center mt-3">
+            <button type="submit" class="save-btn text-white fw-bold px-5" (click)="registerUsers()">
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

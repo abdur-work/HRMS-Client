@@ -1,0 +1,127 @@
+<div class="employee-attendace-section">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="main-heading">Today Employees Leaves</div>
+      <div class="d-flex mt-3 mt-md-0">
+        <div role="button" class="button-right">CSV</div>
+        <div role="button" class="button-right mx-3">PDF</div>
+        <div role="button" class="button-right">PRINT</div>
+      </div>
+    </div>
+    <div class="employee-attendace-section ">
+  <div class="form-group d-flex justify-content-around gap-2">
+    <div class="col-4">
+      <label for="search-input" class="label-input mb-1">Leave</label>
+      <select class="search-input1 mt-1">
+        <option role="button" class="search-input1"
+          [ngClass]="searchEmployeesRqst.filterStatus=='all'?'filter-button-selected':'filter-button'"
+          (click)="filterChange('all')">
+          ALL
+        </option>
+        <ng-container>
+          <option role="button" class="search-input1"
+            [ngClass]="searchEmployeesRqst.filterStatus=='full-day'?'filter-button-selected':'filter-button'"
+            (click)="filterChange('full-day')">
+            Full Leave
+          </option>
+        </ng-container>
+        <ng-container>
+          <option role="button" class="search-input1"
+            [ngClass]="searchEmployeesRqst.filterStatus=='half-day'?'filter-button-selected':'filter-button'"
+            (click)="filterChange('half-day')">
+            Half Leave
+          </option>
+        </ng-container>
+        <ng-container>
+          <option role="button" class="search-input1"
+            [ngClass]="searchEmployeesRqst.filterStatus=='short-leave'?'filter-button-selected':'filter-button'"
+            (click)="filterChange('short-leave')">
+            Short Leave
+          </option>
+        </ng-container>
+        <option role="button" class="search-input1"
+          [ngClass]="searchEmployeesRqst.filterStatus=='pending'?'filter-button-selected':'filter-button'"
+          (click)="filterChange('pending')">
+          Pending
+        </option>
+        <option role="button" class="search-input1"
+          [ngClass]="searchEmployeesRqst.filterStatus=='approved'?'filter-button-selected':'filter-button'"
+          (click)="filterChange('approved')">
+          Approve
+        </option>
+        <option role="button" class="search-input1"
+          [ngClass]="searchEmployeesRqst.filterStatus=='rejected'?'filter-button-selected':'filter-button'"
+          (click)="filterChange('rejected')">
+          Reject
+        </option>
+        <i class="fa-thin fa-caret-down" style="color: #000000; "></i>
+      </select>
+    </div>
+    <div class=" col-4 ">
+      <label for="search-input" class="label-input mb-2">Select From Date</label>
+      <input type="date" class="search-input form-control " />
+    </div>
+    <div class=" col-4">
+      <label for="search-input" class="label-input mb-2">Select To Date</label>
+      <input type="date" class="search-input form-control " />
+    </div>
+  </div>
+
+  <div class="mt-3 table-responsive">
+    <div #leaveHistoryContainer></div>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Leave Date</th>
+          <th>Leave Time</th>
+          <th>Attendance Status</th>
+          <th>Type</th>
+          <th>Reason</th>
+          <th>action</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="employeelist?.length>0" class="table-borderless">
+
+        <tr *ngFor="let emp of employeelist let i = index"
+          [ngStyle]="{ 'height.px': employeelist.length === 1 ? 200 : 'auto'  }">
+          <td scope="row">{{ i + 1 }}</td>
+          <td>
+            <div>
+              <img src="../assets/images/user-icon.png" style="width: 36px; height: 36px; flex-shrink: 0;" alt="" />
+              {{emp.employeeName ? emp.employeeName : '-' }}
+            </div>
+          </td>
+          <td>{{emp.leaveEndDate ? emp.leaveEndDate : '-'}}</td>
+          <td>{{emp.leaveDuration ? emp.leaveDuration : '-'}}
+          </td>
+          <td>
+            <div *ngIf="emp.leaveStatus=='Approved'" class="present-status">Approved</div>
+            <div *ngIf="emp.leaveStatus=='Rejected'" class="rejected-status">Rejected</div>
+            <div *ngIf="emp.leaveStatus=='Pending'" class="pending-status">Pending</div>
+          </td>
+          <td>{{emp.leaveType ? emp.leaveType : '-'}}</td>
+          <td>{{emp.leaveReason ? emp.leaveReason : '-'}}
+          </td>
+          <td>{{emp.action}}
+            <div class="position-relative">
+              <div class="btn-group">
+                <button class="btn btn-link p-0 dropdown-toggle" type="button" id="optionsPopover"
+                  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-light fa-ellipsis-vertical" style="color: #222222;"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="optionsPopover">
+                  <span class="popup_box dropdown-item" (click)="viewHierarchybyList(emp)">
+                    <i class="fa-regular fa-pen-to-square" style="color: #000000;" ></i>
+                    View Details
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

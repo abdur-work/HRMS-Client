@@ -1,0 +1,193 @@
+.main {
+  height: 90vh;
+}
+
+.hrms {
+  font-style: normal;
+  font-weight: 650;
+  font-size: 40px;
+  text-transform: capitalize;
+  color: #095F8F;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.fixed-top {
+  position: sticky !important;
+  top: 0;
+  z-index: 1030;
+}
+
+.btn1_signup {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #095F8F;
+  background-color: white;
+}
+
+// sidenav
+
+#wrapper {
+  display: flex;
+}
+
+#sidebar {
+  background-color: white;
+  height: 89vh;
+  min-width: 318px;
+
+  .header {
+    text-align: center;
+
+    img {
+      margin: 20px 0;
+    }
+
+    .logoSmall {
+      width: 28px;
+      display: none;
+    }
+  }
+}
+
+.divider {
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  width: 170px;
+  margin: 0 auto;
+}
+
+
+
+ul.navigation {
+  list-style-type: none;
+  margin-top: 22px;
+  padding: 0;
+
+  li {
+    a {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 20px 44px;
+      color: #C7C7C7;
+      cursor: pointer;
+      display: flex;
+      border-left: 3px solid transparent;
+
+      &.active {
+        border-color: #095F8F;
+        color: #095F8F;
+
+        img {
+          fill: #095F8F;
+        }
+      }
+
+      i {
+        margin-right: 12px;
+
+        svg {
+          fill: red;
+          vertical-align: middle;
+          margin-top: -5px;
+        }
+      }
+
+      span {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transition: opacity 0.2s, visibility 0.2s;
+        transition: opacity 0.2s, visibility 0.2s;
+        -ms-transition: opacity 0.2s, visibility 0.2s;
+      }
+    }
+  }
+
+  .divider {
+    margin: 12px auto;
+  }
+}
+
+.expandBtn {
+  color: #095F8F;
+  font-size: 1em;
+  text-align: center;
+  position: absolute;
+  bottom: 6px;
+  width: 218px;
+
+  i {
+    cursor: pointer;
+    padding: 20px;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+      transform: scale(1.2, 1.2);
+      -webkit-transform: scale(1.2, 1.2);
+      -ms-transform: scale(1.2, 1.2);
+    }
+  }
+}
+
+#sidebar.collapsed {
+  min-width: 64px;
+  max-width: 64px;
+
+  ul.navigation {
+    li {
+      a {
+        padding: 11px 20px;
+      }
+
+      span {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        -webkit-transition: opacity 0.2s, visibility 0.2s;
+        transition: opacity 0.2s, visibility 0.2s;
+        -ms-transition: opacity 0.2s, visibility 0.2s
+      }
+    }
+  }
+
+  .expandBtn {
+    width: 64px;
+  }
+
+  .divider {
+    width: 20px;
+    display: block;
+  }
+
+  .userPicture {
+    transform: scale(0.8, 0.8);
+    -webkit-transform: scale(0.8, 0.8);
+    -ms-transform: scale(0.8, 0.8);
+  }
+
+  .logoSmall {
+    display: block;
+    margin: 20px auto;
+  }
+
+  .logoLarge {
+    display: none;
+  }
+
+  .userArea {
+    padding: 16px 4px;
+
+    .userName {
+      font-size: 0.75em;
+    }
+  }
+
+  .userArea .accountMenu {
+    position: relative;
+    left: 0;
+  }
+}
+// topnav

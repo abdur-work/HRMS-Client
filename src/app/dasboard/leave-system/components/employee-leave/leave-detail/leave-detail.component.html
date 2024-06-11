@@ -1,0 +1,39 @@
+<div class="dialog-overlay"></div>
+<div class="dialog-container">
+    <div class="dialog-header  justify-content-between d-flex">
+        <h2 class="dialog-title">Leave detail</h2>
+     </div>
+    <div class="dialog-content">
+        <div class="d-flex justify-content-between w-100 mt-4">
+            <div class="w-25">
+                <div class="label-input mb-2">Name : </div>
+                <div class="popup-field">{{ data.employee.employeeName ? data.employee.employeeName : "-" }}</div>
+            </div>
+            <div class="w-25">
+                <div class="label-input mb-2">Date : </div>
+                <div class="popup-field"> {{ data.employee.leaveStartDate ? data.employee.leaveStartDate : "-" }}</div>
+            </div>
+            <div class="w-25">
+                <div class="label-input mb-2">Time :</div>
+                <div class="popup-field">{{ data.employee.leaveTimeFrom ? data.employee.leaveTimeFrom : '-' }}</div>
+            </div>
+            <div class="w-25">
+                <div class="label-input mb-2">Type :</div>
+                <div class="popup-field">{{ data.employee.leaveType ? data.employee.leaveType : "-"}}</div>
+            </div>
+        </div>
+        <div>
+            <div class="w-100 mt-5">
+                <div class="label-input mb-2"> Description :</div>
+                <div class="popup-field1">{{ data.employee.leaveReason ? data.employee.leaveReason : "-"}}</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex gap-3 align-items-end justify-content-end  mt-5" style="margin-top: 25% !important">
+        <button class="previous-btn border-0 " (click)="ClosePopup()">Close</button>
+        <button class="previous-btn border-0 ">Rejected </button>
+        <button class="save-btn border-0" style="width: 110px !important">Approved </button>
+    </div>
+    
+</div>

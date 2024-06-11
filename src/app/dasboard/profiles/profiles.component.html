@@ -1,0 +1,64 @@
+<section class="main-page">
+  <div class="d-flex flex-wrap justify-content-between">
+    <div class="d-flex flex-wrap">
+      <div role="button" class="arrow">
+        <i [routerLink]="['/dashboard']" class="fa fa-light fa-arrow-left"></i>
+      </div>
+      <div class="mx-3">
+        <img [src]="createImgPath(employeeRegisterRqst.employeePhoto,employeeRegisterRqst.photoType)"
+             class="hero-img" alt="profile" />
+      </div>
+      <div class="d-flex flex-column justify-content-between">
+        <h4 class="employee-name">{{ employeeRegisterRqst.fullName }}</h4>
+        <h5 class="employee-position">{{ employeeRegisterRqst.position }}</h5>
+
+        <div class="d-flex align-items-center gap-3">
+          <img src="../../../assets/icons/icon-email.svg" alt="email">
+          <div class="employee-email">
+            {{ employeeRegisterRqst.email }}
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <img src="../../../assets/icons/icon-phone.svg" alt="phone">
+          <div class="employee-number">
+            {{ employeeRegisterRqst.phoneNumber }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex mt-2 mt-md-0 flex-column justify-content-end">
+      <div class="d-flex align-items-center gap-3">
+        <img src="../../../assets/icons/icon-location.svg" alt="location">
+        <div class="employee-location">
+          {{ employeeRegisterRqst.office }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- bottom-section -->
+  <hr />
+  <div class="d-flex gap-2 gap-md-5">
+    <div role="button"
+         class="me-2 p-0"
+         [ngClass]="tabNumber === 1 ? 'link_style_active' : 'link_style_notactive'"
+         (click)="tabNumber = 1">
+      Personal Information
+    </div>
+    <div role="button"
+         class=""
+         [ngClass]="tabNumber === 2 ? 'link_style_active' : 'link_style_notactive'"
+         (click)="tabNumber = 2">
+      Salary
+    </div>
+    <div role="button" 
+         class=""
+         [ngClass]="tabNumber === 3 ? 'link_style_active' : 'link_style_notactive'"
+         (click)="tabNumber = 3">
+      Bank Details
+    </div>
+  </div>
+  <app-personal-information [employeeDetail]="employeeRegisterRqst" *ngIf="tabNumber === 1"></app-personal-information>
+  <app-salary [isProfile]="true" *ngIf="tabNumber === 2"></app-salary>
+  <app-bank-detail [isProfile]="true" *ngIf="tabNumber === 3"></app-bank-detail>
+</section>

@@ -1,0 +1,161 @@
+.main-page {
+  width: 100%;
+}
+.label-heading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #373131;
+}
+.input-style {
+  width: 300px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 0px 0px 2px rgba(76, 111, 255, 0.3);
+  border-radius: 6px;
+  padding: 1% 2%;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+  color: #b5b5bd;
+}
+.request-button {
+  width: 165px;
+  height: 36px;
+  background: #2b6282;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #ffffff;
+}
+.form-check-input {
+  width: 29.96px;
+  height: 29.96px;
+  border-radius: 6px;
+}
+.form-check-input:checked {
+  background-color: rgb(177, 196, 177) !important;
+  border: none;
+}
+#check1 {
+  background: #d5ffe8;
+}
+#check2 {
+  background: #D7D4FF;
+}
+
+#check3 {
+  background: #E5E4F9;
+}
+.form-check-input:focus,
+.label::after,
+label.form-check-label:focus,
+.form-check-input::after,
+.form-check-input:not(:disabled):not(.disabled):active:focus {
+  color: black;
+  outline: 0;
+  border: 0;
+  box-shadow: 0 0 0 0.1rem green !important;
+}
+.form-check-label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #8a8a8a;
+}
+// old
+
+
+.label {
+  width: 100px;
+}
+
+.tables {
+  text-align: center;
+}
+
+table,
+th,
+td {
+  border: 1px solid grey;
+  background-color: white;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 160%;
+  color: #333f48;
+
+  opacity: 0.77;
+}
+
+table,
+th {
+  width: 100px;
+  background-color: #f5f5f6;
+}
+
+table,
+tr {
+  height: 50px;
+}
+
+.label-wid {
+  width: 115px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #373131;
+}
+
+.time {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  color: #333f48;
+  opacity: 0.77;
+}
+
+.absent {
+  background: #ffd4d4;
+  box-shadow: inset 0px 1px 0px rgba(51, 63, 72, 0.2),
+    inset -1px 0px 0px rgba(51, 63, 72, 0.2);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  color: #333f48 !important;
+  opacity: 0.77;
+}
+
+.nine-pm {
+  background: #d4ffe8;
+}
+
+.others-pm {
+  background: #d7d4ff;
+  box-shadow: inset 0px 1px 0px rgba(51, 63, 72, 0.2),
+    inset -1px 0px 0px rgba(51, 63, 72, 0.2);
+}
+
+tr:nth-child(5) {
+  background: #e5e4f9;
+  box-shadow: inset 0px 1px 0px rgba(51, 63, 72, 0.2),
+    inset -1px 0px 0px rgba(51, 63, 72, 0.2);
+}

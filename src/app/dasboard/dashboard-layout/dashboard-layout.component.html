@@ -1,0 +1,51 @@
+<!-- /////////////////////////// -->
+<!-- topnav -->
+<div class="">
+  <div class="d-flex justify-content-between fixed-top bg-white p-3">
+      <div class="col-lg-6 "> <p [routerLink]="['']" class="hrms mb-0">HRMS</p></div>
+      <div class="col-lg-1 col-md-2">
+        <button data-toggle="dropdown"><img src="../../../assets/images/avatar.png" alt=""></button>
+        <ul class="dropdown-menu ">
+          <li><a [routerLink]="['/dashboard/profile']">Profile</a></li>
+          <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+  </div>
+</div>
+<!-- sidenav -->
+<div class="d-flex">
+  <div id="wrapper">
+    <nav id="sidebar" [class.collapsed]="collapsed">
+      <span class="divider"></span>
+      <div class="d-flex flex-column justify-content-between h-100">
+        <div>
+          <ul class="navigation">
+            <li>
+              <a [routerLink]="['/dashboard']"><i><img src="assets/images/sidenav/speaker-wave-2-svgrepo-com.svg" class="me-3" width="20" height="20" alt=""></i><span>Annoucments</span></a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard/profile']"><i><img src="assets/images/sidenav/user-tag-svgrepo-com.svg" class="me-3" width="20" height="20" alt=""></i><span>Profile</span></a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard/attendance-system']"><i><img src="assets/images/sidenav/calendar-date-schedule-svgrepo-com.svg" class="me-3" width="20" height="20" alt=""></i><span>Attendance System</span></a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard/salaries']"><i><img src="assets/images/sidenav/dollar-square-svgrepo-com.svg" class="me-3" width="20" height="20" alt=""></i><span>Salary</span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-5">
+         <ul class="navigation">
+          <li>
+            <a (click)="logout()"><i><img src="assets/images/sidenav/logout-bracket-svgrepo-com.svg" class="me-3" width="20" height="20" alt=""></i><span class="text-danger">Log Out</span></a>
+          </li>
+         </ul>
+        </div>
+      </div>
+      <div class="expandBtn">
+        <span id="sidebarCollapse"><i class="fa fa-arrow-left" [class.fa-arrow-left]="!collapsed" [class.fa-arrow-right]="collapsed" (click)="collapsed = !collapsed"></i></span>
+      </div>
+    </nav>
+    <div style="width:100%;">
+      <router-outlet></router-outlet>
+  </div>

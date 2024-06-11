@@ -1,0 +1,168 @@
+<div #chatContainer></div>
+<!-- <div id="btn_postjobs"
+           class="d-flex justify-content-end">
+        <div role="button"
+             (click)="openChatPopup('save')">
+          
+          <button class="btn Genrate_btn">Genrate Chat</button>
+        </div>
+      </div> -->
+
+<div class="w-100 page1 d-flex justify-content-end">
+
+    <div class="25">
+        <div class="input-group mb-0">
+            <input type="text" class="search_bar search-input form-control" placeholder="Chat"
+                (keyup)="filterSuggestions()" [(ngModel)]="searchEmployeesRqst.employeeName"
+                (focus)="touchedSuggestedtext=false" />
+            <span class="clear-icon" (click)="clearSearch()">
+                <i class="fas fa-times"></i>
+            </span>
+            <ul class="suggestions-list" *ngIf="searchEmployeesRqst.employeeName && !touchedSuggestedtext">
+                <li *ngFor="let c of filteredSuggestions"
+                    (click)="openChat(c.chatId,c.actualUserID,c.userName,c.iscompany,c.senderSignalRId,c.isOnline)">
+                    {{ c.userName |titlecase }}</li>
+            </ul>
+        </div>
+
+        <div class="card scrollable-chats">
+            <ul class="list-group " style="margin-top: 11px">
+                <li *ngFor="let u of signalRService.chatList"
+                    class="list-group-item list-item chat_list d-flex justify-content-between flex-column ">
+                    <div class="list_msg d-flex justify-content-between "
+                        (click)="openChat(u.chatId,u.actualUserID,u.userName,u.iscompany,u.senderSignalRId,u.isOnline)">
+                        <div class="d-flex">
+                            <img class="img-emp mt-2" [src]="createImgPath(u.photoPath)" alt="user-Image">
+                            <div class="ms-3 mt-3">
+                                <p class="name">{{u.userName |titlecase}}</p>
+                                <small class="d-flex mt-3" style="
+                                color: #646464;
+                                 font-family: Montserrat;
+                                 font-size: 12px;
+                                 font-style: normal;
+                                 font-weight: 400;
+                                 line-height: normal;
+                                ">3 new messages</small>
+                            </div>
+                        </div>
+                        <div class="me-2">
+                            <!-- <p *ngIf="u.isOnline==true"><i class="fa-solid fa-circle active_user_check"
+                                    style="color: #6FAA71;"></i></p>
+                            <p *ngIf="u.isOnline ==true" class="text-success">Online</p>
+                            <p *ngIf="u.isOnline==false"><i class="fa-solid fa-circle active_user_check"
+                                    style="color: #f01e02;"></i></p>
+                            <p *ngIf="u.isOnline ==false" class="text-danger  ">Offline</p> -->
+
+                            <p style="color: #646464;
+                            font-family: Montserrat;
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 400;
+                            margin-right: 8px;
+                            line-height: normal;" class="d-flex mt-3"> 2 min ago</p>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+    <div *ngIf="!ActiveUser">
+        <img class="chatimg" src="../../../assets/images/chatshow.png" alt="defult chat">
+    </div>
+    <div *ngIf="ActiveUser!=''">
+        <div class="d-flex justify-content-between chat_section">
+            <div class="d-flex align-items-center">
+                <img class="chat_user_img ms-2" src="../assets/images/employees-img/login-bg.jfif" alt="User-img">
+                <i *ngIf="signalRService.ActiveUserStatus==true" class="fa-solid fa-circle profile-icon"
+                    style="color: #6FAA71;"></i>
+                <i *ngIf="signalRService.ActiveUserStatus==false" class="fa-solid fa-circle profile-icon"
+                    style="color: #f01e02;"></i>
+                <div>
+                    <p class="ActiveUser" style="    margin-top: 10px;
+                    margin-left: 8px;">{{ActiveUser |titlecase}}</p>
+                    <p style="color: #646464;
+                    font-family: Montserrat;
+                    font-size: 12px;
+                    margin-left: 8px;
+                    margin-top: -9px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;">_ is typing</p>
+                    <!-- <p *ngIf="signalRService.ActiveUserStatus==true" class="text-success">online</p> -->
+                    <p *ngIf="signalRService.ActiveUserStatus==false" class="text-danger">Offline</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-contet-end align-items-center">
+                <div class="">
+                    <div class="btn-group">
+                        <button class="btn btn-link p-0" type="button" id="optionsPopover" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="fa fa-light fa-ellipsis-vertical" style="color: #222222; width: 34px;
+                    height: 34px;
+                    flex-shrink: 0;"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="main-head">
+            <div class=" flex flex-column " *ngFor="let info of signalRService.getMessages">
+     
+                <div class=" left_text_backgound d-flex justify-content-start flex-column align-items-start"
+                    *ngIf="info.senderID != signalRId">
+                    <p class="left-text_style  p-2">{{info.message}}</p>
+                    <small class="text-dark text-muted mt-1" style="font-size: 9px;">{{info.date
+                        |date:'shortTime'}}</small>
+
+                </div>
+            
+                <div *ngIf="info.senderID == signalRId" class=" d-flex justify-content-end flex-column align-items-end">
+                    <img *ngIf="info.fileType !=null " class="img_send border"
+                        alt="image-send">
+                    <div class="right_text_background text-muted mt-1">
+                        <p class="right_text_style ">{{info.userName }} </p>
+                        <p class="right_text_style p-2">{{info.message}} </p>
+
+                        <small class="text-dark text-muted mt-1" style="font-size: 9px;">{{info.date
+                            |date:'shortTime'}}</small>
+                    </div> 
+                </div>
+            </div>
+            <div style="margin-top: 5.8%;" #scrollDown></div>
+        </div>
+        <div class="send_msg d-flex align-items-center mb-3">
+            <!-- <div class="d-flex align-items-center justify-content-centerng">
+                <div *ngIf="file" class="position-relative">
+                    <div
+                        class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle remove-icon">
+                        <i role="button" class="fa fa-remove" (click)="removeUploadedFile()"></i>
+                    </div>
+                    <img [src]="file" class="profile-image" />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <img *ngIf="dummyImage" class="change_logo" src="../../../assets/icons/uploadimg.png" width="50"
+                    height="50" alt="">
+            </div>
+            <div class="file_top">
+                <input class="upload_btn" type="file" (change)="onSelectFile($event)" [accept]="acceptFiles">
+            </div> -->
+            <input type="text" class="msg-input " placeholder="Type a message" [(ngModel)]="dataSend"
+                (keydown.enter)="sendMessage()">
+            <div class="btn-container d-flex justify-content-end">
+                <button class="save-btn p-2 m-1 " (click)="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <!-- <button class="btn" (click)="chatSupport = !chatSupport">Chat</button> -->
+    </div>
+</div>

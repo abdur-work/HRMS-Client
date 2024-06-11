@@ -1,0 +1,382 @@
+<!-- <div class="main_page">
+  <div class="filter-section">
+    <div class="d-flex flex-column flex-sm-row flex-xs-row align-items-center gap-2">
+      <div class="input-group mb-0">
+        <input type="text" class="search_bar form-control" placeholder="Search by Name" aria-label="Search" (keyup)="filterSuggestions()" [(ngModel)]="searchEmployeesRqst.employeeName" (focus)="touchedSuggestedtext=false" />
+        <span class="clear-icon" (click)="clearSearch()">
+          <i class="fas fa-times"></i>
+        </span>
+        <ul class="suggestions-list" *ngIf="searchEmployeesRqst.employeeName && !touchedSuggestedtext">
+          <li *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion.employeeName)">{{ suggestion.employeeName }}</li>
+        </ul>
+      </div>
+      <div *ngIf="isAddEmployeeAccess" id="btn_postjobs" class="add-employee-button">
+        <button class="add-employee-btn" [routerLink]="['/dashboard/employees/add-employee']">
+          Add Employee
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap mt-3 align-items-center">
+      <label id="lbl_filters" for="" class="form-label me-3 filter-label">
+        Filters :
+      </label>
+      <div class="me-3 mt-2 mt-xl-0" style="width: 200px;">
+        <select class="form-select p-2" style="height: 40px;" aria-label="Default select example" [(ngModel)]="searchEmployeesRqst.employmentType" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Employment Type</option>
+          <ng-container *ngFor="let et of listLookup.employmentTypeDDLResponse">
+            <option [value]="et.employmentTypeId">{{et.employmentTypeName}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="me-3 mt-2 mt-xl-0" style="width: 200px;">
+        <select class="form-control p-2" style="height:40px" [(ngModel)]="searchEmployeesRqst.location" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select office</option>
+          <ng-container *ngFor="let o of listLookup.officeLocationDDL">
+            <option [value]="o.officeId">{{o.officeLocationName}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="me-3 mt-2 mt-xl-0" style="width: 200px;">
+        <select class="form-control p-2" style="height:40px" [(ngModel)]="searchEmployeesRqst.department" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select department</option>
+          <ng-container *ngFor="let d of listLookup.departmentDDL">
+            <option [value]="d.departmentId">{{d.departmentName}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="me-3 mt-2 mt-xl-0" style="width: 200px;">
+        <select class="form-control p-2" style="height:40px" [(ngModel)]="searchEmployeesRqst.position" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select position</option>
+          <ng-container *ngFor="let p of listLookup.positionDDL">
+            <option [value]="p.positionId">{{p.positionName}}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="mt-2 mt-xl-0" style="width: 200px;">
+        <select class="form-control p-2" style="height:40px" [(ngModel)]="searchEmployeesRqst.employmentStatus" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Employement Status</option>
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="deactive">Deactive</option>
+        </select>
+      </div>
+      <div class="me-3 mt-2 mt-xl-0">
+        <button class="post_btn" (click)="getEmployeeBasicDetailForCompany()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap justify-content-start gap-2">
+    <div class="card p-3 toggler" *ngFor="let emp of employeelist | paginate : config_pgEmployeeList;let i = index">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center toggler">
+          <img role="button" [routerLink]="['/dashboard/employees', emp.employeeID]" [src]="createImgPath(emp.employeePhoto, emp.photoType)" class="img-emp" alt="img-emp" />
+          <div class="mx-3 justify-content-between align-items-center h-100">
+            <h4>{{ emp.fullName }} </h4>
+            <h3>{{ emp.position }}</h3>
+            <h2>{{ emp.workType }}</h2>
+           
+          </div>
+        </div>
+        <div class="dropdown show ">
+          <a class="fas fa-ellipsis-v" style='font-size:30px' role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-bs-expanded="false"> </a>
+          
+          <div class="dropdown-menu" style="margin-left: -100px !important;" aria-bs-labelledby="dropdownMenuLink">
+          <div class="edit">
+            <ul>
+              <li *ngIf="isEmployeeEdit" ><a (click)="editEmployee(emp.employeeID)" style="cursor: pointer;" class="link">Edit</a> </li>
+              <li *ngIf="isEmployeeDelete"><a (click)="deleteEmployee(emp.employeeID, emp.userID)" class="link" style="cursor: pointer;">Delete</a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex mt-3">
+        <div class="dept">Department</div>
+        <div class="design ms-5">{{ emp.department }}</div>
+      </div>
+      <div class="d-flex mt-3 align-items-center">
+        <i class="fa fa-regular fa-envelope"></i>
+        <div class="ms-3 mails">{{ emp.email }}</div>
+      </div>
+      <div class="d-flex mt-3 align-items-center">
+        <i class="fa fa-solid fa-location-crosshairs"></i>
+        <div class="ms-3 loc">{{ emp.office }}</div>
+      </div>
+       <div class="mt-3 d-flex justify-content-end">
+         <div class="ms-3 loc">
+           {{emp.isActivated?'Activated':'Deactivated'}}
+
+           <label class="toggle-switch">
+             <input type="checkbox" [(ngModel)]="emp.isActivated" (change)="OnChangeEmployeeStatus(emp.employeeID,$event)">
+           </label>
+         </div>
+      </div>
+    </div>
+    <div #employeeEditContainer></div>
+    <div #employeeDeleteContainer></div>
+  </div>
+
+</div> -->
+
+
+<!-- new -->
+
+
+<div class="main_page employee-section p-3">
+  <div class="filter-section ">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h4> Employee List </h4>
+      </div>
+      <div id="btnContainer" class="d-flex gap-3">
+        <img src="../.././../assets/icons/view/Grid view-icon.svg" class="border-right" (click)="listView()"
+          [ngClass]="{'active': columns[0].active}">
+        <img src="../.././../assets/icons/view/List view-icon.png" (click)="gridView()"
+          [ngClass]="{'active': columns[1].active}">
+      </div>
+    </div>
+    <div class="d-flex justify-content-around gap-2 ">
+      <div class="col-6">
+        <label for="search-input" class="label-input mb-2">Search Name.</label>
+        <input type="text" class=" search-input d-flex" placeholder="Search by Name" aria-label="Search"
+          (keyup)="filterSuggestions()" [(ngModel)]="searchEmployeesRqst.employeeName"
+          (focus)="touchedSuggestedtext=false" />
+
+        <ul class="suggestions-list" *ngIf="searchEmployeesRqst.employeeName && !touchedSuggestedtext">
+          <li *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion.employeeName)">{{
+            suggestion.employeeName }}</li>
+        </ul>
+      </div>
+
+      <div class="col-3 mt-2">
+        <label for="search-input" class="label-input ">Employment Type</label>
+        <select class="search-input " aria-label="Default select example"
+          [(ngModel)]="searchEmployeesRqst.employmentType" (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Employment Type</option>
+          <ng-container *ngFor="let et of listLookup.employmentTypeDDLResponse">
+            <option [value]="et.employmentTypeId">
+              {{ et.employmentTypeName }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="col-3">
+        <label for="search-input" class="label-input mb-2">Position</label>
+        <select class="search-input p-2" [(ngModel)]="searchEmployeesRqst.department"
+          (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select department</option>
+          <ng-container *ngFor="let d of listLookup.departmentDDL">
+            <option [value]="d.departmentId">{{ d.departmentName }}</option>
+          </ng-container>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-around gap-2">
+
+      <div class="col-4 ">
+        <label for="search-input" class="label-input mb-2">Office.</label>
+        <label for="search-input" class="label-input mb-2">Search Location.</label>
+        <select class="search-input p-2" [(ngModel)]="searchEmployeesRqst.location"
+          (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select office</option>
+          <ng-container *ngFor="let o of listLookup.officeLocationDDL">
+            <option [value]="o.officeId">{{o.officeLocationName}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="col-4">
+        <label for="search-input" class="label-input mb-2">
+          Department </label>
+        <select class="search-input p-2" [(ngModel)]="searchEmployeesRqst.position"
+          (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Please select position</option>
+          <ng-container *ngFor="let p of listLookup.positionDDL">
+            <option [value]="p.positionId">{{ p.positionName }}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div class="col-4">
+        <label for="search-input" class="label-input mb-2">Status</label>
+        <select class="search-input p-2" [(ngModel)]="searchEmployeesRqst.employmentStatus"
+          (change)="getEmployeeBasicDetailForCompany()">
+          <option value="">Employement Status</option>
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="deactive">Deactive</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3 ">
+      <button class="save-btn border-0" style="width: 160px !important"
+        [routerLink]="['/dashboard/employees/add-employee']">
+        Add Employee
+      </button>
+    </div>
+
+  </div>
+  <div *ngIf="columns[0].active">
+    <div class="row d-flex justify-content-center ">
+      <hr>
+      <div class="tbl job_app  mt-3">
+
+        <div class="scroll_tbl ">
+          <table id="app_table" class="table table-borderless bg-white">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Employement TYPE</th>
+                <th scope="col">Position Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Hire Date</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- //working -->
+              <tr *ngFor="let emp of employeelist | paginate : config_pgEmployeeList;let i = index">
+
+                <td scope="row">{{ i + 1 }}</td>
+                <td>{{ emp.fullName ? emp.fullName : "-" }}</td>
+                <td>{{ emp.workType ? emp.workType : "-" }}</td>
+                <td>{{ emp.position ? emp.position : "-"}}</td>
+                <td>{{ emp.isActivated ? emp.isActivated : "-"}}</td>
+                <td>{{ emp.hireDate ? emp.hireDate :"-"}}</td>
+                <td>
+                  <div class="position-relative">
+                    <div class="btn-group">
+                      <button class="btn btn-link p-0 dropdown-toggle" type="button" id="optionsPopover"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-light fa-ellipsis-vertical" style="color: #222222;"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="optionsPopover">
+                        <span class="popup_box dropdown-item" (click)="editEmployee(emp.employeeID)">
+                          <i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>
+                          Edit
+                        </span>
+                        <span class="popup_box dropdown-item" (click)="deleteEmployee(emp.employeeID, emp.userID)">
+                          <i class="fa-regular fa-trash-alt" style="color: #000000;"></i>
+                          Delete
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                
+
+              </tr>
+
+            </tbody>
+
+          </table>
+          <div #employeeEditContainer></div>
+          <div #employeeDeleteContainer></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- cards-sections-starts -->
+  <div *ngIf="columns[1].active">
+    <div class="d-flex flex-wrap justify-content-start gap-2">
+      <div class="card p-3 toggler" *ngFor="let emp of employeelist | paginate : config_pgEmployeeList;let i = index">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex  toggler">
+            <img role="button" [routerLink]="['/dashboard/employees', emp.employeeID]"
+              [src]="createImgPath(emp.employeePhoto, emp.photoType)" class="img-emp" alt="img-emp" />
+
+          </div>
+          <!-- new drop down -->
+          <div class="position-relative">
+            <div class="btn-group">
+              <button class="btn btn-link p-0 dropdown-toggle" type="button" id="optionsPopover"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-light fa-ellipsis-vertical" style="color: #222222;"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="optionsPopover">
+                <span class="popup_box dropdown-item" (click)="editEmployee(emp.employeeID)">
+                  <i class=" " (click)="editEmployee(emp.employeeID)">
+                    <!-- <img src="/assets/icons/Edit-Square.png" alt="" /> -->
+                  </i>
+                  <i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>
+                  Edit
+                </span>
+                <span class="popup_box dropdown-item" (click)="deleteEmployee(emp.employeeID, emp.userID)">
+                  <i class=" " (click)="deleteEmployee(emp.employeeID, emp.userID)">
+                    <!-- <img src="/assets/icons/Edit-Square.png" alt="" /> -->
+                  </i>
+                  <i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>
+                  Delete
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- end -->
+        </div>
+        <div class="d-flex justify-content-between align-items-end">
+          <div>
+            <h4>{{ emp.fullName }} </h4>
+            <h3>{{ emp.position }}</h3>
+
+          </div>
+          <div class="ms-3 loc">
+            {{emp.isActivated?'Activated':'Deactivated'}}
+            <label class="switch">
+              <input type="checkbox"  [(ngModel)]="emp.isActivated"
+                (change)="OnChangeEmployeeStatus(emp.employeeID,$event,emp.fullName )">
+              <span class="slider round" [style.backgroundColor]="emp.isActivated ? '#8e24ff' : 'red'"></span>
+            </label>
+          </div>
+        </div>
+        <div class="rectangle mt-3 p-3">
+          <div class="d-flex justify-content-between w-100">
+            <div class="d-flex flex-column w-50 mt-2">
+              <div class="dept ">Department</div>
+              <div class="design">{{ emp.department || '-' }}</div>
+            </div>
+            <div class="d-flex w-50 flex-column mt-2 justify-content-end">
+              <div class="dept">Hire Date</div>
+              <div class="design">{{ emp.hireDate ? emp.hireDate : '-' }}</div>
+            </div>
+          </div>
+          <div class="d-flex w-100 justify-content-between">
+            <div class="d-flex w-50 flex-column mt-2">
+              <div class="dept ">Type</div>
+              <div class="design">{{ emp.workType ? emp.workType : '-' }}</div>
+            </div>
+            <div class="d-flex w-50 flex-column mt-2 justify-content-end">
+              <div class="dept">Efficiency</div>
+              <div class="design">
+                <ng-container *ngIf="emp.rating > 0; else noRating">
+                  <i class="fa fa-solid fa-star" style="color: #eeaa25;" *ngFor="let star of getStars(emp.rating)"></i>
+                </ng-container>
+                <ng-template #noRating>
+                  -
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+      <div #employeeEditContainer></div>
+      <div #employeeDeleteContainer></div>
+    </div>
+  </div>
+</div>

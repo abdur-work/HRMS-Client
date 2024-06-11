@@ -1,0 +1,18 @@
+<div class="main-page">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <a role="button" class="text-decoration-none mx-5" [ngClass]="tabNumber === 1 ? 'link_style_active' :
+         'link_style_notactive'" (click)="tabNumber = 1">Attendance</a>
+      <a role="button" class="text-decoration-none" [ngClass]="tabNumber === 3 ? 'link_style_active' :
+         'link_style_notactive'" (click)="tabNumber = 3">Leave Request</a>
+    </div>
+    <div class="d-flex">
+      <div role="button" class="button-right">CSV</div>
+      <div role="button" class="button-right mx-3">PDF</div>
+      <div role="button" class="button-right">PRINT</div>
+    </div>
+  </div>
+  <hr  class="m-0 p-0"/>
+  <app-attendance *ngIf="tabNumber === 1"></app-attendance>
+  <app-leave-request *ngIf="tabNumber === 3"></app-leave-request>
+</div>

@@ -1,0 +1,552 @@
+body {
+  background-color: #dbddde !important;
+  font-family: "Poppins", sans-serif;
+  margin-top: 20px !important;
+}
+a {
+  text-decoration: none !important;
+}
+.main_page-total {
+  border-radius: 16px 16px 0px 0px !important;
+  background: #fff !important;
+  padding: 1%;
+  .top-welcome {
+    p {
+      font-size: 15px;
+      font-family: "Montserrat";
+      margin: 0;
+    }
+    span {
+      font-size: 24px;
+      font-weight: 700;
+      font-family: "Montserrat";
+    }
+  }
+  .policy {
+    p {
+      font-size: 15px;
+      font-family: "Montserrat";
+      margin: 0;
+    }
+    span {
+      font-size: 18px;
+      font-weight: 600;
+      font-family: "Montserrat";
+    }
+  }
+  .first-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1%;
+    .first-row-first-column {
+      border-radius: 8px;
+      padding: 1%;
+      border: 0.5px solid #a7a7a7;
+      background: #fff;
+      height: 256px;
+      width: 100%;
+      span {
+        color: #222;
+        font-family: "Montserrat";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .rounded {
+        border-radius: 8px;
+        background: #f4e9ff;
+      }
+    }
+  }
+}
+.time_stat {
+  border: 0.5px solid #a7a7a7;
+  width: 69%;
+  height: 434px;
+}
+.performing {
+  border: 0.5px solid #a7a7a7;
+  width: 34%;
+  height: 434px;
+
+}
+.per_card{
+  height: 370px;
+  overflow-y: auto;
+}
+.events{
+  border: 0.5px solid #a7a7a7;
+
+}
+.checked {
+  color: orange;
+  font-size: 14px;
+}
+.holidies{
+  line-height: 28px;
+  b{
+font-size: 18px;
+font-weight: 500;
+  }
+  p{
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+.hello{
+  rotate: 90deg;
+  color: rgb(211, 211, 211);
+}
+.team_members{
+  border-radius: 8px;
+      padding: 1%;
+      border: 0.5px solid #a7a7a7;
+      background: #fff;
+      height: 435px;
+      width: 100%;
+}
+.main_card{
+  overflow-y: auto;
+  height: 393px;
+}
+.view_detail{
+  text-decoration: underline;
+  color: #8E24FF !important;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Montserrat';
+}
+.enp_hire{
+  background-color: #8E24FF;
+  p{
+    color: #8E24FF;
+  }
+}
+.Announcements{
+  border-radius: 8px;
+  padding: 1%;
+  border: 0.5px solid #a7a7a7;
+  background: #fff;
+  height: 435px;
+  width: 100%;
+}
+.date_Show{
+  width: 150px;
+  background-color: rgb(233, 229, 229);
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #ffffff; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 10px;
+}
+::ng-deep .canvasjs-chart-container {
+  .canvasjs-chart-credit{
+  display: none !important;
+  }
+}
+// .attendance-time {
+//   height: 50px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+// .attendance-status {
+//   height: 50px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+// .time-heading {
+//   background-color: none !important;
+// }
+// .new {
+//   background: brown;
+//   height: 50px;
+//   align-items: center;
+//   color: white;
+// }
+// .pending-time {
+//   color: black;
+//   font-size: 18px;
+//   font-family: cursive;
+//   font-weight: 600;
+// }
+// .container {
+//   margin-left: 10% !important;
+//   width: 83% !important;
+// }
+// .user-cards > div:nth-child(1) {
+//   padding: 14px 20px 14px 20px;
+//   background-color: #ffffff;
+//   border-radius: 37px;
+//   width: 41%;
+// }
+// .user-cards > div:nth-child(2) {
+//   background-color: #ffffff;
+//   border-radius: 37px;
+//   padding: 14px;
+//   width: 31%;
+// }
+// .user-cards > div:nth-child(3) {
+//   background-color: #ffffff;
+//   border-radius: 37px;
+// }
+// .rectangle {
+//   width: 5.5px;
+//   height: 23px;
+//   background-color: #dbddde;
+//   margin: 5px;
+//   display: inline-block;
+//   border-radius: 20px;
+// }
+// .header-text {
+//   padding: 5px 0px 14px 5px;
+//   font-weight: bold;
+//   font-family: "Inter", sans-serif;
+// }
+// .user-cards > div:nth-child(1) > div:nth-child(1) {
+//   display: flex;
+//   width: 100%;
+// }
+// .text {
+//   color: #8a8a8a;
+//   margin-bottom: 15 px;
+//   font-size: 16px;
+// }
+// .first-card > div:nth-child(2) > div:first-child {
+//   margin-right: 20px;
+//   margin-top: 10px;
+// }
+// .contact-details {
+//   margin-bottom: 15px;
+// }
+// .icon {
+//   margin-right: 5px;
+// }
+// .adrein-text {
+//   font-weight: 700;
+//   font-family: "Poppins", sans-serif;
+//   color: #373131;
+//   font-size: 18px;
+// }
+// .team-card {
+//   width: 100%;
+// }
+// .manager-img {
+//   width: 108px;
+// }
+// .manager-text {
+//   color: #8a8a8a;
+//   padding-top: 28px;
+//   font-size: 14px;
+//   margin-left: 5px;
+// }
+// .team-lead-text {
+//   padding-top: 33px;
+//   color: #8a8a8a;
+//   font-size: 14px;
+//   margin-bottom: 0px !important;
+// }
+// .team-mates-text {
+//   padding-top: 33px;
+//   color: #8a8a8a;
+//   margin-bottom: 0px !important;
+// }
+// .layered-images > img {
+//   border: 2px solid #ffffff;
+//   border-radius: 25px;
+//   width: 31px;
+// }
+// .layered-images > img:first-child {
+//   width: 34px !important;
+// }
+// .layered-images > img:nth-child(2) {
+//   margin-left: -25px;
+// }
+// .layered-images > img:nth-child(3) {
+//   margin-left: -24px;
+// }
+// .layered-images > img:nth-child(4) {
+//   margin-left: -24px;
+// }
+// .layered-images > img:nth-child(5) {
+//   margin-left: -24px;
+// }
+// .layered-images > img:nth-child(6) {
+//   margin-left: -24px;
+// }
+// .layered-images > img:nth-child(7) {
+//   margin-left: -25px;
+//   border: 0px;
+// }
+// .layered-images > a:nth-child(8) {
+//   margin-left: -28px;
+//   color: white;
+//   font-size: 13px;
+// }
+// .user-cards > div:nth-child(3) {
+//   padding: 13px 20px;
+//   width: 25%;
+// }
+// .user-cards > div:nth-child(3) > div:first-child > div:first-child {
+//   width: 100%;
+// }
+// .leave-img {
+//   padding: 0px 0px 15px 20px;
+//   margin-top: -40px;
+// }
+// .leaves-section > p:first-child {
+//   color: #3d4b93;
+//   font-size: 14px;
+//   font-weight: 500;
+//   margin-bottom: 0px !important;
+//   margin-left: 15px;
+// }
+// .leaves-section > p:nth-child(2) {
+//   font-weight: 700;
+//   font-size: 14px;
+//   color: #8a8a8a;
+//   margin-right: 15px;
+// }
+
+// /* After Cards Status and Policy Section */
+// .container > div:nth-child(2) {
+//   background-color: #ffffff;
+//   border-radius: 23px;
+//   margin-top: 30px !important;
+//   padding: 10px;
+// }
+// .text-head {
+//   font-size: 19px;
+//   color: #8a8a8a;
+//   font-weight: 400;
+//   margin-bottom: 0px;
+//   margin-left: 9px;
+//   padding-top: 15px;
+// }
+// .time-head {
+//   color: #333f48;
+//   margin-left: 9px;
+//   font-family: "Inter", sans-serif;
+//   font-size: 19px;
+//   font-weight: 700px;
+// }
+// /* Time Table & Attendance Section*/
+// .time-table-and-attendance-section {
+//   background-color: #ffffff;
+//   margin-top: 30px;
+//   border-radius: 37px;
+//   padding: 20px;
+// }
+// table {
+//   margin: auto;
+//   width: 100%;
+// }
+
+// button {
+//   display: block;
+// }
+// /* Announcements Section */
+// .announcements-section {
+//   margin-top: 30px;
+//   background-color: #ffffff;
+//   min-height: 200px;
+//   padding: 20px 20px 0px 20px;
+//   border-radius: 37px;
+//   margin-bottom: 30px;
+//   overflow: auto;
+//   scroll-behavior: smooth;
+// }
+// .announcement_list{
+//     border-bottom: 1px dashed lightgrey;
+//     padding-top: 1%;
+// }
+// .thumb-img {
+//     height: 50px;
+//     width: 50px;
+//     margin-right: 26px;
+//     border-radius: 50px;
+//     object-fit: cover;
+// }
+// .thumb-punching-section > div:first-child > div:first-child > p:first-child {
+//   font-size: 16px;
+//   color: #373131;
+//   font-weight: 700;
+// }
+// .date-text {
+//   font-weight: 500;
+//   font-size: 14px;
+//   color: #373131;
+// }
+// .time-text {
+//   margin: 0 32px 0 20px;
+//   font-weight: 500;
+//   font-size: 14px;
+//   color: #857e7e;
+// }
+// .thumb-punching-section > div:nth-child(2) > p:first-child {
+//   font-size: 14px;
+//   font-weight: 500;
+//   color: #857e7e;
+//   width: 94%;
+// }
+// .manager-text-responsive {
+//   display: none;
+// }
+// .first-card > div:first-child > div:nth-child(2) {
+//   padding: 0px !important;
+// }
+// @media (max-width: 1200px) {
+//   .user-cards {
+//     .icon {
+//       display: block;
+//     }
+//   }
+//   .first-card > div:nth-child(2) > div:first-child {
+//     margin-right: 7px;
+//   }
+//   .first-card > div:nth-child(2) > div:nth-child(2) {
+//     text-align: center;
+//   }
+//   .text {
+//     font-size: 13px;
+//   }
+//   .text-head {
+//     font-size: 14px;
+//   }
+//   .time-head {
+//     font-size: 14px;
+//   }
+//   .leave-img {
+//     width: 65%;
+//     margin-left: 10px;
+//     margin-top: 8px;
+//   }
+// }
+// @media (max-width: 992px) {
+//   .container {
+//     width: 90%;
+//     margin: 0 auto;
+//   }
+//   .manager-text-responsive {
+//     display: block;
+//   }
+//   .first-card > div:nth-child(2) > div:first-child > img:first-child {
+//     width: 44% !important;
+//   }
+//   .first-card > div:nth-child(2) {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+//   .second-card > div:nth-child(2) {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+//   .leaves-section {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+//   .manager-text {
+//     display: none;
+//   }
+//   .manager-img {
+//     margin-top: 10px;
+//     width: 51%;
+//   }
+//   .manager-text-responsive {
+//     font-weight: 700;
+//     font-family: "Poppins", sans-serif;
+//     color: #373131;
+//     font-size: 18px;
+//   }
+//   .team-lead-text {
+//     padding-top: 0px;
+//   }
+//   .leaves-section > p:first-child {
+//     margin: 0px;
+//   }
+//   .leave-img {
+//     width: 85%;
+//     margin-left: 0px;
+//     margin-bottom: 23px;
+//   }
+//   .leaves-section > p:nth-child(2) {
+//     margin-left: 0px;
+//   }
+//   .thumb-punching-section > div:nth-child(2) > p:first-child {
+//     font-size: 12px;
+//   }
+//   .thumb-img {
+//     margin-top: 30px;
+//   }
+//   .thumb-punching-section > div:first-child > div:first-child > p:first-child {
+//     font-size: 13px;
+//   }
+//   .time-text {
+//     margin: 0px;
+//     font-size: 14px;
+//   }
+//   .time-head {
+//     font-size: 10px;
+//   }
+//   .text-head {
+//     font-size: 12px;
+//   }
+// }
+// @media (max-width: 767px) {
+//   .user-cards {
+//     flex-direction: column;
+//   }
+//   .first-card {
+//     width: 100% !important;
+//     margin-bottom: 20px;
+//   }
+//   .second-card {
+//     width: 100% !important;
+//     margin-bottom: 20px;
+//   }
+//   .third-card {
+//     width: 100% !important;
+//   }
+//   .announcements-section > div:nth-child(2) {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+//   .announcements-section > div:nth-child(2) > div:first-child {
+//     margin: 0 auto;
+//   }
+// }
+// .current_status {
+//   background: white;
+//   padding: 0% 1%;
+//   border-radius: 18px;
+//   margin-top: 2%;
+// }
+
+// .status-ball {
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+// }
+
+// .red {
+//   background-color: red;
+// }
+
+// .green {
+//   background-color: green;
+// }

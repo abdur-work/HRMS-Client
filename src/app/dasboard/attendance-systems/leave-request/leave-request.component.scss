@@ -1,0 +1,137 @@
+.request-button {
+  width: 165px;
+  height: 36px;
+  background: #2b6282;
+  border-radius: 6px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  color: #ffffff;
+}
+.table-responsive {
+  margin-left: -2%;
+  margin-right: -2%;
+}
+th {
+  width: 282px;
+  padding: 1%;
+  text-align: start;
+  background: #e5e5fb;
+  box-shadow: inset 0px -1px 0px #edf2f7;
+}
+.table-header {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #606771;
+}
+td {
+  padding: 1%;
+  text-align: start;
+  box-shadow: inset 0px -1px 0px #edf2f7;
+}
+.table-data {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  color: #425466;
+}
+.status-pending {
+  background: #f7d628;
+  border-radius: 20px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.status-present {
+  background: #2cc73b;
+  border-radius: 20px;
+  height: 27px;
+  width: 93px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.status-leave {
+  background: #6f7670;
+  border-radius: 20px;
+  height: 27px;
+  width: 93px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.status-short {
+  background: #2c86c7;
+  border-radius: 20px;
+  height: 27px;
+  width: 93px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.status-half {
+  background: #2c3bc7;
+  border-radius: 20px;
+  height: 27px;
+  width: 93px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.status-absent {
+  background: #ff3541;
+  border-radius: 20px;
+  height: 27px;
+  width: 93px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}

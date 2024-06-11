@@ -1,0 +1,86 @@
+<div class="main_page">
+    <div>
+     <div class="d-flex">
+      <div role="button" class="arrow" (click)="gobackToEmployees()">
+        <i class="fa fa-light fa-arrow-left"></i>
+      </div>
+      <div class="main-header">
+        Team Details
+      </div>
+     </div>
+  
+      <div class="mt-3">
+        <table id="app_table" class="table table-borderless ali">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NAME</th>
+              <th scope="col">POSITION</th>
+              <th scope="col">RATE TEAM MEMBER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+            class="table-row" *ngFor="let tm of teamMembers">
+              <td scope="row">{{tm.employeeEmail}}</td>
+              <td>{{tm.employeeName}}</td>
+              <td>{{tm.designationName}}</td>
+              <td>
+                <button type="button" class="btn rating_btn" (click)="openModal(tm)"
+                         data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"><img class="me-1" src="../../../assets/icons/star.png" alt=""> Rate</button>
+              </td>              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- model -->
+  <!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+           <div class="d-flex justify-content-end">
+            <button type="button" class="btn_close close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+           <div class="d-flex justify-content-center">
+            <img src="../../../assets/images/Ellipse 2.png" width="100" height="100" alt="user img">
+            <div class="d-flex justify-content-center flex-column ms-3">
+              <h5>{{modalObject.employeeName}}</h5>
+              <h6>{{modalObject.designationName}}</h6>
+            </div>
+           </div>
+           <div class="performance mb-4 mt-4">
+            <h5>Performance</h5>
+            <div class="star-rating">
+                <span *ngFor="let star of Performancestar; let i = index" 
+                      [class.active]="i < Performancerating"
+                      (click)="Performancerating = i + 1">
+                  &#9733;
+                </span>
+              </div>
+           </div>
+           <div class="performance">
+            <h5>Punctuality</h5>
+            <div class="star-rating">
+                <span *ngFor="let star of Punctualitystar; let i = index" 
+                      [class.active]="i < Punctualityrating"
+                      (click)="Punctualityrating = i + 1">
+                  &#9733;
+                </span>
+              </div>
+           </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <button type="submit" class="btn submit_btn mb-3" (click)="calculateAverageRating()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="text-center bg-light">
+    <p class="login-text">Employee Login</p>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="content_area mt-3 mb-4">
+      <div class="form-group">
+        <label class="label_style">Email</label>
+        <input type="text" class="form-control mt-2" placeholder="Email" [(ngModel)]="userLogin.email" (keyup.enter)="Login()"/>
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="label_style">Password</label>
+        <input type="password" class="form-control mt-2" placeholder="Password" [(ngModel)]="userLogin.password" (keyup.enter)="Login()"/>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" (click)="Login()" class="btn btn_submit mt-4">
+          <div class="button-text">Login</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="">
+  <div class="w-100 ">
+    <table style="width: 100%;">
+     <div class="mt-5">
+      <tr class="table-wid">
+        <td >Postion :</td>
+        <td >Department :</td>
+        <td >Position</td>
+      </tr>
+      <tr>
+          <td class="head">{{employeeDetail.supervisor || '-'}}</td>
+          <td class="head">{{employeeDetail.department || '-'}}</td>
+          <td class="head">{{employeeDetail.team || '-'}}</td>
+      </tr>
+     </div>
+     <div>
+      <tr class="table-wid" >
+        <td >Email Address </td>
+        <td >Contact number </td>
+        <td >Employement Type</td>
+      </tr>
+      <tr>
+          <td class="head">{{employeeDetail.email || '-'}}</td>
+          <td class="head">{{employeeDetail.phoneNumber || '-'}}</td>
+          <td class="head">{{employeeDetail.employmentType || '-'}}</td>
+      </tr>
+     </div>
+
+     <div>
+      <tr class="table-wid" >
+        <td >Experience</td>
+        <td >Qualification </td>
+        <td >Work Type</td>
+      </tr>
+      <tr>
+          <td class="head">{{employeeDetail.experience || '-'}}</td>
+          <td class="head">{{employeeDetail.qualification || '-'}}</td>
+          <td class="head">{{employeeDetail.workType || '-'}}</td>
+      </tr>
+     </div>
+      
+     <div>
+      <tr class="table-wid" >
+        <td >Hire Date</td>
+        <td >Contracts end date </td>
+        
+      </tr>
+      <tr>
+          <td class="head">{{employeeDetail.hireDate || '-'}}</td>
+          <td class="head">{{employeeDetail.contractEnd || '-'}}</td>
+      </tr>
+     </div>
+    </table>
+  </div>
+  </div>

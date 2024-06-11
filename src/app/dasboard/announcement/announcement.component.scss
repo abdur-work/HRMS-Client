@@ -1,0 +1,130 @@
+/* Common styles shared by multiple classes */
+.star-heading,
+.news-feed,
+.news-heading {
+  font-family: "Poppins";
+  font-weight: 700;
+  color: #373131;
+  /* Add specific styles for each class where necessary */
+}
+
+.star-name,
+.star-role,
+.star-team,
+.star-department,
+.news-date,
+.news-time,
+.news-description {
+  font-family: "Poppins";
+  font-weight: 500;
+  color: #373131;
+  /* Add specific styles for each class where necessary */
+}
+
+.eve-title {
+  color: #222;
+  font-family: "Montserrat";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.event-description {
+  max-height: 100px;
+  min-width: 500px;
+  // overflow-y: auto;
+  // scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+.star-image,
+.news-image {
+  border-radius: 24px;
+  object-fit: cover;
+  /* Add specific styles for each class where necessary */
+}
+
+/* Styles for the nav tabs */
+ul.nav.nav-tabs {
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.button-announcement {
+  border-radius: 10px;
+  background: #2b6282;
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  height: 38px;
+  line-height: normal;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.nav-item {
+  margin-bottom: -1px;
+}
+
+.dialog-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+  background-color: #2b6282;
+  border-radius: 10px;
+}
+
+.nav-link {
+  color: #858585;
+  font-family: "Montserrat";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 45px;
+}
+
+.nav-link.active {
+  color: #222;
+  font-family: "Montserrat";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 45px;
+  border-bottom: 5px solid #8E24FF;
+ 
+}
+::ng-deep .nav-tabs .nav-link.active{
+  background-color: none !important;
+  border-color: 0 !important;
+}
+.tab-content{
+  overflow-y: scroll;
+  height: calc(100vh - 257px);
+  border-radius: 15px;
+}
+
+@media (max-width: 576px) {
+  ul.nav.nav-tabs {
+    padding: 5px;
+  }
+
+  .nav-link {
+    margin-right: 3px;
+  }
+}

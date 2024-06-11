@@ -1,0 +1,260 @@
+<div class="main-wrapper">
+  <div class="main_page-total">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between w-100 pe-2 mb-3">
+        <div class="top-welcome">
+          <p>Welcome back</p>
+          <span>{{ profileResponse.employeeName | titlecase }}</span>
+        </div>
+        <div class="policy">
+          <p class="text-end m-0">Working policy:</p>
+          <span>{{ profileResponse.workingPolicyTimeFrom || '---' }} - {{ profileResponse.workingPolicyTimeTo || '---'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="first-row">
+      <div
+        class="first-row-first-column gap-3 justify-content-between d-flex flex-column"
+      >
+        <span>Work Log</span>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="text-muted">
+            <p class="m-0">{{ today | date : "EEEE," }}</p>
+            <p>{{ today | date : "MMMM d, yyyy" }}</p>
+          </div>
+          <div class="d-flex 3 align-items-center gap-3">
+            <div *ngIf="IsrelaxTime" class="d-flex gap-3">
+              <div
+                class="d-flex align-items-center justify-content-between gap-3"
+              >
+                <button class="btn btn-success" (click)="checkInMessage('in')">
+                  Punch In
+                </button>
+                <p class="d-flex justify-content-between flex-column">
+                  <span>Relaxation Time</span>
+                  <span class="ps-2 pe-2 pending-time"
+                    >{{ pendingTime }} min</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="endIsrelaxTime" class="d-flex 3 align-items-center gap-3">
+            <div>
+              <button class="btn btn-danger" (click)="checkInMessage('out')">
+                Punch Out
+              </button>
+              <p class="d-flex justify-content-between flex-column">
+                <span>Relaxation Time</span>
+                <span class="ps-2 pe-2 pending-time"
+                  >{{ EndpendingTime }} min</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="time_show">
+          <h1>05:11:32</h1>
+          <p class="text-muted">Total work time</p>
+        </div>
+      </div>
+
+      <div class="first-row-first-column d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between align-items-start w-100">
+          <span>Total Employee</span>
+          <span routerLink="employees" class="view_detail">View Detail</span>
+        </div>
+        <h1>{{countData.totalEmployees}}</h1>
+        <div class="enp_hire p-3 rounded">
+          <p>Last 3 Months</p>
+          <div class="d-flex justify-content-between">
+            <strong>New Hires</strong>
+            <strong>{{countData.newHiredEmployees}}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="first-row-first-column d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between align-items-start w-100">
+          <span>Leave Balance</span>
+          <span routerLink="leavesystem" class="view_detail">View History</span>
+        </div>
+        <div class="card-body">
+          <div class="d-flex w-100 justify-content-center">
+            <div
+              class="d-flex flex-column gap-5"
+              style="font-weight: 600; position: relative"
+            >
+              <div style="border-left: 4px solid #e3c8ff; padding-left: 10px">
+                <span>Leaves Remaining ({{ countData.remainingleaves}})</span>
+              </div>
+              <div style="border-left: 4px solid #8e24ff; padding-left: 10px">
+                <span>Leaves Used ({{ countData.consumedleaves }})</span>
+              </div>
+            </div>
+            <div class="w-50">
+              <canvasjs-chart
+                [options]="manageEmployee"
+                [styles]="{ width: '250px', height: '160px' }"
+              ></canvasjs-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="first-row mt-3">
+      <div class="time_stat rounded p-3">
+        <div class="d-flex justify-content-between">
+          <b>Work Time Statistics</b>
+          <span
+            >You worked <b class="view_detail"> {{ hoursPart }} hours and {{ minutesPart }} minutes</b> this week till
+            now</span
+          >
+        </div>
+        <canvasjs-chart
+          [options]="chartOptions"
+          [styles]="{ width: '100%', height: '360px' }"
+        ></canvasjs-chart>
+      </div>
+      <div class="performing rounded p-3">
+       <div class="d-flex justify-content-between align-items-center"> 
+        <b>Top Performing Employee</b>
+        <button (click)="ratingPopup()" class="btn">Give Rating</button>
+       </div>
+        <div class="per_card">
+          <div *ngFor="let user of getAllEmployeeRating">
+            <div class="d-flex justify-content-between mt-3">
+              <div class="d-flex gap-3">
+                <div><img [src]="createImgPath(user.employeePhoto)" width="50" alt="image" /></div>
+                <div>
+                  <b>{{ user.employeeName || '---' }}</b>
+                  <p>{{ user.role || '---' }}</p>
+                </div>
+              </div>
+              <div>
+                <b>{{ user.ratingValue || '---' }} </b>
+                <span class="fa fa-star checked ms-2"></span>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="events w-100 rounded mt-3 p-3">
+      <div class="d-flex gap-5">
+        <span>Events & Holidays</span>
+      </div>
+
+      <div class="d-flex mt-4 flex-wrap">
+        <div class="d-flex" style="width: 250px" *ngFor="let event of holidaysEvent">
+          <div class="holidies">
+            <b>{{event.yearlyHolidaysName}}</b>
+            <p class="m-0 text-muted">
+              <img
+                class="me-2"
+                src="../../../assets/images/calender.svg"
+                width="20"
+                alt=""
+              />
+             {{event.oneDayHolidayDate | date}}
+             <!-- {{event.fromDate | date}}-{{event.toDate | date}} -->
+            </p>
+            <p class="m-0">{{event.numberOfDays }} days leave</p>
+          </div>
+          <div class="hello">-------------</div>
+        </div>
+        <!-- Repeat this block for other events -->
+      </div>
+    </div>
+
+    <div class="first-row mt-3">
+      <div class="Announcements gap-3" *ngIf="!showThanks">
+        <b>Announcements</b>
+        <div class="main_card">
+          <div *ngFor="let user of anouncements">
+            <div class="d-flex justify-content-between mt-3">
+              <div class="d-flex flex-column gap-2">
+                <b>{{ user.eventTitle  |titlecase}}</b>
+                <p class="m-0 text-muted">
+                  <img
+                    class="me-2"
+                    src="../../../assets/images/calender.svg"
+                    width="20"
+                    alt=""
+                  />
+                  {{ user.eventDate |date}}
+                  <span class="ms-3">
+                    <img
+                      class="me-1"
+                      src="../../../assets/images/Vector copy.png"
+                      width="15"
+                      alt=""
+                    />
+                    {{ user.eventTime }}
+                  </span>
+                </p>
+                <p [innerHTML]="user.eventDescription"></p>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+
+      <div class="team_members gap-3" *ngIf="!showThanks">
+        <div class="d-flex justify-content-between align-items-start w-100">
+          <b>Team Members</b>
+          <!-- <span class="view_detail">View Detail</span> -->
+        </div>
+        <div class="main_card">
+          <div *ngFor="let user of teammembers">
+            <div class="d-flex justify-content-between mt-3">
+              <div class="d-flex gap-3">
+                <div><img [src]="user.imageSrc" width="50" alt="image" /></div>
+                <div>
+                  <b>{{ user.fullName || '---' | titlecase }}</b>
+                  <p>{{ user.position || '---'}}</p>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+
+      <div class="team_members gap-3" *ngIf="!showThanks">
+        <div class="d-flex justify-content-between align-items-start w-100">
+          <b>On Leave</b>
+          <!-- <span class="view_detail">View Detail</span> -->
+        </div>
+        <div class="main_card">
+          <div *ngFor="let user of Leaves">
+            <div class="d-flex justify-content-between mt-3">
+              <div class="d-flex gap-3">
+                <div><img [src]="user.imageSrc" width="50" alt="" /></div>
+                <div class="d-flex flex-column gap-1">
+                  <b>{{ user.name }}</b>
+                  <p>{{ user.role }}</p>
+                  <p class="date_Show text-muted p-1 rounded text-center">
+                    <img
+                      class="me-2"
+                      src="../../../assets/images/calender.svg"
+                      width="20"
+                      alt=""
+                    />
+                    {{ user.date }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div #postJobEditContainer></div>

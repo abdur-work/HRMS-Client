@@ -1,0 +1,85 @@
+<!-- filter section start -->
+<div class="d-flex justify-content-between text-center gap-3 my-3">
+  <div class="d-flex gap-2 align-items-center">
+    <i
+      role="button"
+      [routerLink]="['/dashboard/attendance-system']"
+      class="fa fa-solid fa-arrow-left"
+    ></i>
+    <div class="emp-name text-center">
+      {{ employeeName }} Attendance
+    </div>
+  </div>
+  <div class="d-flex justify-content-end text-center gap-3">
+  <select class="search-dropdown"
+          [(ngModel)]="monthValue"
+          (change)="onChangeDateFilter($event, 'm')">
+    <option selected value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+  </select>
+  <select class="search-dropdown"
+          [(ngModel)]="yearValue"
+          (change)="onChangeDateFilter($event, 'y')">
+    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+  </select>
+  </div>
+
+  <div >
+    <select
+      class="search-dropdown"
+    >
+    <option role="label" selected disabled hidden>Download</option>
+    <option role="button" >CSV</option>
+    <option role="button" >PDF</option>
+      <option role="button" >PRINT</option>
+
+    </select>
+   </div>
+ </div>
+ <!-- calender sections design start -->
+<div class="d-flex mt-5">
+  <div #attendanceContainer></div>
+
+  <table >
+    <tr>
+      <th style="background-color: #fff;" *ngFor="let weekDay of weekDaysName" >
+        {{ weekDay }}
+      </th>
+    </tr>
+    <tr  *ngFor="let attendaceRow of showCalendarView">
+      <td  style="background-color: #fff;" *ngFor="let day of attendaceRow" [class.inactive]="!day">
+        <div class="d-flex justify-content-between h-100 align-items-center">
+          <div *ngIf="day && day.attendanceDateNum">
+            <div class="d-flex justify-content-between">
+              <div [class.current-day]="day.attendanceDateNum == dayValue">{{ day.attendanceDateNum }}</div>
+            </div>
+          </div>
+          <div *ngIf="day && !day.attendanceStatus && (day.attendanceDateNum==dayValue || !CheckDate(day.attendanceDateNum))"
+               (click)="addAttendancePopup(day)"><i class="fa-regular fa-circle-question"></i></div>
+
+          <div class="status-present" *ngIf="day && day.attendanceStatus=='Present'" [title]="checkAttendanceTime(day)">Present</div>
+          <div class="status-leave" *ngIf="day && day.attendanceStatus=='full-day'">Full Day</div>
+          <div class="status-short" *ngIf="day && day.attendanceStatus=='short-leave'" [title]="checkShortLeave(day)">Short Leave</div>
+          <div class="status-half" *ngIf="day && day.attendanceStatus=='half-day'" [title]="checkHalfDay(day)">Half Day</div>
+          <div class="status-absent" *ngIf="day && day.employeeAttendanceID==0 && day.attendanceStatus=='Absent'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="8" fill="#FF4D4F"/>
+            </svg></div>
+          <div class="WeeklyHoliday" *ngIf="day && day.attendanceStatus=='WeeklyHoliday'"></div>
+          <div class="YearlyHoliday" *ngIf="day && day.attendanceStatus!='Present'&& day.attendanceStatus!='full-day'&& day.attendanceStatus!='short-leave'&& day.attendanceStatus!='half-day' && day.attendanceStatus!='WeeklyHoliday'&& day.attendanceStatus!='Absent'&& day.attendanceStatus!=null">{{day.attendanceStatus}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div #deletePopup></div>
+</div>
+<br />

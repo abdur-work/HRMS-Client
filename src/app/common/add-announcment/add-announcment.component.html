@@ -1,0 +1,73 @@
+<div class="dialog-overlay"></div>
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2 class="top-header-main">Add New Announcement</h2>
+
+  </div>
+  <div class="dialog-content" style="text-align: left">
+    <div class="d-flex flex-column gap-2">
+      <div class="d-flex gap-3">
+          <div class="form-group">
+            <label class="label-input">Type Title</label>
+            <input
+              type="text"
+              class="search-input"
+              [(ngModel)]="announcementModel.eventTitle"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="label-input">Select Type</label>
+            <select class="search-input">
+              <option value="">Employee Announcment</option>
+              <option value="">Team Announcment</option>
+              <option value="">New Hire announcment</option>
+            </select>
+          </div>
+      </div>
+      <div class="d-flex gap-3">
+          <div class="form-group">
+            <label class="label-input">Select Date</label>
+            <input
+              type="date"
+              class="search-input"
+              [(ngModel)]="announcementModel.eventDate"
+            />
+          </div>
+          <div class="form-group">
+            <label class="label-input">Select Time</label>
+            <input
+              type="time"
+              class="search-input"
+              placeholder="Enter time i.e,. 10:00 pm"
+              [(ngModel)]="announcementModel.eventTime"
+            />
+          </div>
+      </div>
+
+      <div>
+        <label class="label-input mb-3">Description</label>
+        <quill-editorinput
+          [(ngModel)]="descriptionBody"
+          (onContentChanged)="OnDescriptionContentChanged($event)"
+          aria-placeholder="e.g. write description"
+        >
+        </quill-editorinput>
+      </div>
+    </div>
+  </div>
+  <div class="dialog-footer gap-3">
+    <div
+      role="button"
+      class="previous-btn d-flex align-items-center justify-content-center"
+      (click)="closeForm()">
+      Cancel
+    </div>
+    <div
+      role="button"
+      class="save-btn d-flex align-items-center justify-content-center"
+      (click)="SaveCompanyAnnouncement()">
+      Save
+    </div>
+  </div>
+</div>

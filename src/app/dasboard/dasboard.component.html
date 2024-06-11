@@ -1,0 +1,138 @@
+<div class="main">
+    <div class="d-flex ">
+      <nav id="sidebar" [class.collapsed]="collapsed">
+        <span class="divider"></span>
+        <div class="d-flex flex-column justify-content-between h-100">
+          <div>
+            <ul class="navigation">
+              <li>
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['/dashboard']" [ngClass]="{ active: isActive('') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/dashboard-icon.svg"
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link-active">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['announcement']" [ngClass]="{ active: isActive('announcement')}">
+                  <i>
+                    <img src="../../assets/images/slider/notification-icon.svg" class="me-3" width="40" height="40"
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link">Annoucments</span>
+                </a>
+              </li>
+              <li class="text-center">
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['profile']" [ngClass]="{ active: isActive('profile') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/company-profile-icon.svg"
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link">Profile</span>
+                </a>
+              </li>
+              <li *ngIf="canCheck(103)">
+                <a [routerLink]="['jobs-applications']" [ngClass]="{ active: isActive('jobs-applications') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/job-application-icon.svg" class="me-3" width="20" height="20"
+                         alt="" />
+                  </i><span>Jobs Applications</span>
+                </a>
+              </li>
+              <li *ngIf="canCheck(108)">
+                <a [routerLink]="['employees']" [ngClass]="{ active: isActive('employees') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/employees-icon.svg" class="me-3" width="20" height="20"
+                         alt="" />
+                  </i><span>Employess</span>
+                </a>
+              </li>
+              <li *ngIf="canCheck(131)">
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['attendance-system']" [ngClass]="{ active: isActive('attendance-system') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/attendance-systeme-icon.svg"
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link">Attendance System</span>
+                </a>
+              </li>
+              <li  *ngIf="canCheck(123)">
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['payroll']" [ngClass]="{ active: isActive('payroll') }">
+                  <i>
+                    <img src=""
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link">PayRoll Setup</span>
+                </a>
+              </li>
+
+              <li *ngIf="canCheck(126)">
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['leavesystem']" [ngClass]="{ active: isActive('leavesystem') }">
+                  <i>
+                    <img src="../../assets/images/dashboard/sidenavbar/leaves-icon.svg"
+                         class="me-3"
+                         width="20"
+                         height="20"
+                         alt="icon" />
+                  </i><span class="link">leave Management</span>
+                </a>
+              </li>
+              <li>
+                <a class="text-decoration-none text-center"
+                   [routerLink]="['chat']" [ngClass]="{ active: isActive('chat') }">
+                  <i>
+                    <img src="../../assets/images/slider/chat.png" class="me-3" width="40" height="40" 
+                         class="me-3"
+                         alt="icon" />
+                  </i><span class="link">Chat</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <ul class="navigation">
+            <li class="d-flex align-items-center">
+              <a (click)="logout()">
+                <i>
+                  <img src="../../assets/images/dashboard/logout.svg"
+                       class="me-3 logout-button"
+                       width="20"
+                       height="20"
+                       alt="icon" />
+                </i><span class="text-danger logout-text">Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- <div class="expandBtn">
+          <span id="sidebarCollapse"
+            ><i
+              class="fa fa-arrow-left"
+              [class.fa-arrow-left]="!collapsed"
+              [class.fa-arrow-right]="collapsed"
+              (click)="collapsed = !collapsed"
+            ></i
+          ></span>
+        </div> -->
+      </nav>
+      <div class="bg-light w-100 p-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>

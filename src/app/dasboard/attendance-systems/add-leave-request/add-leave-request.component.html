@@ -1,0 +1,252 @@
+<div class="main-page">
+  <div class="d-flex gap-3 align-items-center">
+    <div role="button" (click)="gobackToAttendace()">
+      <i class="fa fa-solid fa-arrow-left"></i>
+    </div>
+    <div class="main-heading">Add Request</div>
+  </div>
+  <div class="row align-items-center my-4">
+    <!-- <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+      <a
+        role="button"
+        class="text-decoration-none"
+        [ngClass]="
+          tabNumber === 1 ? 'active-link-style' : 'notactive-link-style'
+        "
+        (click)="tabChangeEvent(1)"
+        >Add Attendance</a
+      >
+      
+    </div> -->
+    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+      <a
+        role="button"
+        class="text-decoration-none"
+        [ngClass]="
+          tabNumber === 2 ? 'active-link-style' : 'notactive-link-style'
+        "
+        (click)="tabChangeEvent(2)"
+        >Add Leave Request</a
+      >
+    </div>
+  </div>
+  <div class="row gap-2 gap-md-0">
+    <div class="col-12 col-md-6">
+      <!-- <div
+        class="dialog-content d-flex flex-column gap-4"
+        *ngIf="tabNumber === 1"
+      >
+        <div class="form-group d-flex align-items-center gap-5 w-100">
+          <label class="label-style w-50">Selected Date:</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="attendanceModel.attendanceDate"
+          />
+        </div>
+        <div class="form-group d-flex align-items-center gap-5 w-100">
+          <label class="label-style w-50">Checked In:</label>
+          <input
+          type="time"
+            class="form-control"
+            [(ngModel)]="attendanceModel.checkedIn"
+          />
+        </div>
+        <div class="form-group d-flex align-items-center gap-5 w-100">
+          <label class="label-style w-50">Checked Out:</label>
+          <input
+          type="time"
+
+            class="form-control"
+            [(ngModel)]="attendanceModel.checkedOut"
+          />
+        </div>
+      </div> -->
+
+      <div
+        class="dialog-content d-flex flex-column gap-4"
+        *ngIf="tabNumber === 2"
+      >
+        <div
+          class="form-group d-flex align-items-center justify-content-between gap-5 w-100"
+        >
+          <label for="leave-duration" class="label-style"
+            >Leave Duration:</label
+          >
+          <div class="radio-wrapper">
+            <input
+              type="radio"
+              id="full-day"
+              name="leave-duration"
+              value="full-day"
+              checked
+              [(ngModel)]="employeeLeaveModel.leaveDuration"
+              (change)="leaveType = 'full-day'"
+            />
+            <label for="full-day" class="label-style">Full Day</label>
+          </div>
+          <div class="radio-wrapper">
+            <input
+              type="radio"
+              id="half-day"
+              name="leave-duration"
+              value="half-day"
+              [(ngModel)]="employeeLeaveModel.leaveDuration"
+              (change)="leaveType = 'half-day'"
+            />
+            <label for="half-day" class="label-style">Half Day</label>
+          </div>
+          <div class="radio-wrapper">
+            <input
+              type="radio"
+              id="short-leave"
+              name="leave-duration"
+              value="short-leave"
+              [(ngModel)]="employeeLeaveModel.leaveDuration"
+              (change)="leaveType = 'short-leave'"
+            />
+            <label for="short-leave" class="label-style">Short Leave</label>
+          </div>
+        </div>
+        <div class="form-group d-flex align-items-center gap-5 w-100">
+          <label class="label-style w-50">Leave Type:</label>
+          <select
+            class="form-control"
+            [(ngModel)]="employeeLeaveModel.leaveType"
+          >
+            <option value="Vacation">Vacation</option>
+            <option value="Sick">Sick</option>
+            <option value="Personal">Personal</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <ng-container *ngIf="leaveType == 'full-day'">
+          <div class="form-group d-flex align-items-center gap-5 w-100">
+            <label class="label-style w-50">Start Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="employeeLeaveModel.leaveStartDate"
+            />
+          </div>
+          <div class="form-group d-flex align-items-center gap-5 w-100">
+            <label class="label-style w-50">End Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="employeeLeaveModel.leaveEndDate"
+            />
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="leaveType == 'half-day' || leaveType == 'short-leave'"
+        >
+          <div class="form-group d-flex align-items-center gap-5 w-100">
+            <label class="label-style w-50">Time From:</label>
+            <input
+              type="time"
+              class="form-control"
+              placeholder="Enter time like 02:00 PM"
+              [(ngModel)]="employeeLeaveModel.leaveTimeFrom"
+            />
+          </div>
+          <div class="form-group d-flex align-items-center gap-5 w-100">
+            <label class="label-style w-50">Time To:</label>
+            <input
+              type="time"
+              class="form-control"
+              placeholder="Enter time like 06:00 PM"
+              [(ngModel)]="employeeLeaveModel.leaveTimeTo"
+            />
+          </div>
+        </ng-container>
+        <div class="form-group d-flex align-items-center gap-5 w-100">
+          <label class="label-style w-50">Reason For Leave:</label>
+          <textarea
+            id="reason"
+            name="reason"
+            rows="5"
+            class="form-control"
+            cols="50"
+            [(ngModel)]="employeeLeaveModel.leaveReason"
+            #myInput
+            [maxlength]="maxChars"
+          ></textarea>
+        </div>
+        <label class="range">
+          {{ myInput.value.length }} /{{ maxChars }}</label
+        >
+      </div>
+      <div class="my-5 text-center">
+        <button
+          type="button"
+          class="btn save-button col-6"
+          *ngIf="tabNumber == 1"
+          (click)="addAttendance()"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          class="btn save-button col-6"
+          *ngIf="tabNumber == 2"
+          (click)="addLeaveRequest()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="right-section">
+        <div class="text-center">
+          <img
+            src="../../../../assets/images/dashboard/leave-request-lottie.svg"
+            class="lottie-image"
+            alt="lottie"
+          />
+        </div>
+        <div class="mt-3 ms-5 me-5 pb-3">
+          <div class="row">
+            <div class="col heading-right">Total Leaves</div>
+            <div class="col count-right text-end">{{ totalleaves }}</div>
+          </div>
+          <div class="mt-3 row">
+            <div class="col heading-right">Consumed Leaves</div>
+            <div class="col count-right text-end">{{ consumedleaves }}</div>
+          </div>
+          <div class="mt-3 row">
+            <div class="col heading-right">Remaining Leaves</div>
+            <div class="col count-right text-end">{{ remainingleaves }}</div>
+          </div>
+        </div>
+        <!-- <div class="w-100">
+          <div class="d-flex justify-content-around">
+            <div>
+              <h5>Total Leaves</h5>
+            </div>
+            <div>
+              <h4>22</h4>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <div>
+            <h5>Consumed Leaves</h5>
+          </div>
+          <div>
+            <h4>10</h4>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <div>
+            <h5>Remaining Leaves</h5>
+          </div>
+          <div>
+            <h4>12</h4>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

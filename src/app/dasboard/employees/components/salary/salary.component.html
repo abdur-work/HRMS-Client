@@ -1,0 +1,39 @@
+<!-- top section endss -->
+<div class="d-flex mt-3">
+  <div class="w-100">
+    <div #salaryContainer></div>
+    <!-- <div id="btn_postjobs" class="align-self-center input-group">
+      <a class="btn text-white" style="background-color:#095F8F;" (click)="setEmployeeSalaryPopup()">{{employeeSalaryDetail.action=='update'?'Edit':'Add'}} Salary</a>
+    </div> -->
+    <table style="width:100%" *ngIf="employeeSalaryDetail.payType">
+      <tr class="table-wid ">
+        <th>Type</th>
+        <th>Hours Worked</th>
+        <th>Amount</th>
+      </tr>
+      <tr class="table-wid">
+        <td>{{employeeSalaryDetail.payType}}</td>
+        <ng-container *ngIf="employeeSalaryDetail.payType=='monthly'">
+          <td class="head amount-margin">Salary :</td>
+          <td>{{employeeSalaryDetail.monthlyPay}} {{employeeSalaryDetail.currency}}</td>
+        </ng-container> 
+        <ng-container *ngIf="employeeSalaryDetail.payType=='monthly'">
+          <td>1.5 %</td>
+        </ng-container>
+        <ng-container *ngIf="employeeSalaryDetail.payType=='hourly'">
+          <td>{{employeeSalaryDetail.hoursWorked}}</td>
+          <td>{{employeeSalaryDetail.hourlyPay}} {{employeeSalaryDetail.currency}}</td>
+        </ng-container>
+        <ng-container *ngIf="employeeSalaryDetail.payType=='daily'">
+          <td>{{employeeSalaryDetail.dailyPay}}{{employeeSalaryDetail.currency}}</td>
+        </ng-container>
+        <ng-container *ngIf="employeeSalaryDetail.payType=='weekly'">
+          <td class="head amount-margin">Weeks Worked :</td>
+          <td>{{employeeSalaryDetail.weeksWorked}}</td>
+          <td class="head amount-margin">Amount :</td>
+          <td>{{employeeSalaryDetail.weeklyPay}} {{employeeSalaryDetail.currency}}</td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+</div>

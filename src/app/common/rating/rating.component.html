@@ -1,0 +1,37 @@
+<div class="dialog-overlay"></div>
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2 class="top-header-main">Give Rating</h2>
+  </div>
+  <div class="dialog-content">
+
+        <div>
+            <label class="label-input">Employees</label>
+            <select class="form-control" [(ngModel)]="employeeRatingRqst.employee">
+                <option value="0" hidden disabled>Select an employee</option>
+                <option *ngFor="let employee of employees" [value]="employee.name">
+                    {{ employee.name }}
+                  </option>
+            </select>
+            <!-- <p *ngIf="selectedEmployeeId">Selected Employee ID: {{ selectedEmployeeId }}</p> -->
+        </div>
+        <div class="form-group col-12 col-md-6 mt-3">
+            <label class="label-input">Performance</label>
+            <br />
+            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" (click)="onRate(star)">
+              {{ employeeRatingRqst.selectedRating >= star ? "★" : "☆" }}
+            </span>
+          </div>
+   
+
+  
+
+    
+
+  </div>
+
+  <div class="d-flex justify-content-end mt-3 gap-3">
+    <button type="submit" class="btn previous-btn" (click)="closeEditPostJob()">Cancel</button>
+    <button type="submit" class="btn save-btn" (click)="employeeRatingSave()">Save</button>
+  </div>
+</div>

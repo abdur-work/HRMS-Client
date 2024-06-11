@@ -1,0 +1,251 @@
+<div class="dialog-overlay"></div>
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2 class="dialog-title">Edit Employee</h2>
+    <button class="close-button" (click)="closeEditEmployeeJob()">Close</button>
+  </div>
+  <div class="dialog-content">
+    <div class="job_bar">
+      <a (click)="tabSwitch(1)"
+         [ngClass]="[tabNumber == 1 ? 'activeSubMenu' : '']">Personal Information</a>
+      <a (click)="tabSwitch(2)"
+         [ngClass]="[tabNumber == 2 ? 'activeSubMenu' : '']">HR Information</a>
+    </div>
+    <!-- details -->
+    <div class="d-flex flex-column mt-2 gap-3" *ngIf="tabNumber == 1">
+      <div>
+        <div #dialogContainer></div>
+        <div class="d-flex align-items-center justify-content-center">
+
+          <img *ngIf="dummyImage" src="../../../../../assets/images/employees-img/Ellipse 1210.svg"
+            class="profile-image  mb-3 " style="margin-left: 5% " alt="profile-image" />
+          <div *ngIf="!uplodedFileUrl">
+            <div class="dropdown">
+              <img class="dropdown-toggle" style=" margin-left: -95%; margin-top: 80%; "
+                src="../../../../../assets/images/employees-img/change photo option.svg" data-bs-toggle="dropdown"
+                aria-expanded="false" />
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" (click)="openWebcam()">Webcam</a></li>
+                <li>
+                  <label class="dropdown-item">
+                    Browse For File
+                    <input class="upload_btn" type="file" style="display: none;"
+                      (change)="openFileUploadModal($event)" [accept]="acceptFiles" />
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div *ngIf="uplodedFileUrl" class="position-relative  ">
+      
+            <img [src]="uplodedFileUrl" (click)="showPreview()" class="profile-image" />
+
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column mt-2">
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Full Name</label>
+            <input type="text"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.fullName"
+                   placeholder="" />
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Email</label>
+            <input type="text"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.email"
+                   placeholder="" />
+          </div>
+        </div>
+
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Gender</label>
+            <select class="search-input"
+                    [(ngModel)]="employeeRegisterRqst.gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Diverse">Diverse</option>
+            </select>
+          </div>
+
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Qualification</label>
+            <input type="text"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.qualification" />
+          </div>
+        </div>
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Experience</label>
+            <input type="text"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.experience" />
+          </div>
+
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Phone Number</label>
+            <input type="text"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.phoneNumber" />
+          </div>
+        </div>
+        <div class="text-center mt-1 mt-md-5">
+          <button type="submit"
+                  class="save-btn "
+                  (click)="validatePersonalInformation()">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column gap-2" *ngIf="tabNumber === 2">
+      <div class="d-flex flex-column gap-1">
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Work Type</label>
+            <select [(ngModel)]="employeeRegisterRqst.workType"
+                    class="search-input">
+              <option value="">Select Type</option>
+              <option value="onsite">On Site</option>
+              <option value="remote">Remote</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+          </div>
+
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Employment Type</label>
+            <select [(ngModel)]="employeeRegisterRqst.employmentType"
+                    class="search-input">
+              <option value="">Please select Employment Type</option>
+              <ng-container *ngFor="let et of listLookup.employmentTypeDDLResponse">
+                <option [value]="et.employmentTypeId.toString()">{{et.employmentTypeName}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Office</label>
+            <select [(ngModel)]="employeeRegisterRqst.office" class="search-input" (change)="OnOfficeSelectionChange($event)">
+              <option value="0">Please select office</option>
+              <ng-container *ngFor="let o of listLookup.officeLocationDDL">
+                <option [value]="o.officeId">{{o.officeLocationName}}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Department</label>
+            <select [(ngModel)]="employeeRegisterRqst.department" class="search-input" (change)="OnDepartmentSelectionChange($event)">
+              <option value="0">Please select department</option>
+              <ng-container *ngFor="let d of listDepartment">
+                <option [value]="d.departmentId">{{d.departmentName}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Team</label>
+            <select [(ngModel)]="employeeRegisterRqst.team" class="search-input" (change)="OnTeamSelectionChange($event)">
+              <option value="0">Please select team</option>
+              <ng-container *ngFor="let t of listTeam">
+                <option [value]="t.teamId">{{t.teamName}}</option>
+              </ng-container>
+            </select>
+          </div>
+
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Postion</label>
+            <select [(ngModel)]="employeeRegisterRqst.position" class="search-input">
+              <option value="0">Please select position</option>
+              <ng-container *ngFor="let p of positionList">
+                <option [value]="p.positionId">{{p.positionName}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Supervisor</label>
+            <select [(ngModel)]="employeeRegisterRqst.supervisor" *ngIf="employeeRegisterRqst.supervisor"
+                    class="search-input">
+              <option value="0">Please select supervisor</option>
+              <option value="">Other</option>
+              <ng-container *ngFor="let s of supervisorList">
+                <option [value]="s.supervisorId">{{s.supervisorName}}</option>
+              </ng-container>
+            </select>
+            <input type="text" class="search-input" *ngIf="!employeeRegisterRqst.supervisor" [(ngModel)]="employeeRegisterRqst.supervisor" />
+
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Hire Date</label>
+            <input type="date"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.hireDate" />
+          </div>
+        </div>
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Probation Period</label>
+            <select [(ngModel)]="employeeRegisterRqst.probationPeriod"
+                    class="search-input">
+              <option value="No Probation">No Probation</option>
+              <option value="1 month">1 month</option>
+              <option value="2 month">2 month</option>
+              <option value="3 month">3 month</option>
+              <option value="4 month">4 month</option>
+              <option value="5 month">5 month</option>
+              <option value="6 month">6 month</option>
+              <option value="End of probation period">
+                End of probation period
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Contract Ends</label>
+            <input type="date"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.contractEnd" />
+          </div>
+        </div>
+        <div class="row gap-3 gap-md-0">
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Shift</label>
+            <select [(ngModel)]="employeeRegisterRqst.shiftId" class="search-input">
+              <option value="0">Please Shift</option>
+              <ng-container *ngFor="let p of listLookup.getShiftListDDLResponse">
+                <option [value]="p.shiftId">{{p.shiftName}}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="label-input">Number Of Leaves Allowed</label>
+            <input type="number"
+                   class="search-input"
+                   [(ngModel)]="employeeRegisterRqst.numberOfLeavesAllowed" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-center mt-1 mt-md-5">
+          <button type="submit"
+                  class="save-btn "
+                  (click)="editEmployee()">
+            Update
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
